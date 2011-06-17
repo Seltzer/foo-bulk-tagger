@@ -14,14 +14,16 @@
 namespace FBT
 {
 	class SelectionTreeModel;
+	class SelectionToMatch;
+	struct ExtendedTagInfo;
 
 	class MatchWithReleasesDialog : public ATL::CDialogImpl<MatchWithReleasesDialog>
 	{
 		BEGIN_MSG_MAP_EX(MatchWithReleasesDialog)
 			MSG_WM_INITDIALOG(OnInitDialog)
-			MESSAGE_HANDLER(WM_TESTMSGLOOP, TestMsgLoop)
 	        COMMAND_ID_HANDLER(IDOK, OnOKCancel)
 	        COMMAND_ID_HANDLER(IDCANCEL, OnOKCancel)
+			COMMAND_ID_HANDLER(IDC_APPLYTAGS, OnApplyTags);
 			NOTIFY_HANDLER(IDC_SELECTIONTREE, TVN_SELCHANGED, OnTreeSelectionChanged)
 	      
 			NOTIFY_CODE_HANDLER(PIN_SELCHANGED, OnSelChanged);
@@ -45,8 +47,8 @@ namespace FBT
 	private: // Message handlers
 		BOOL OnInitDialog(CWindow, LPARAM);
 		LRESULT OnOKCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+		LRESULT OnApplyTags(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 		LRESULT OnTreeSelectionChanged(int, LPNMHDR, BOOL&);
-		LRESULT TestMsgLoop(UINT, WPARAM, LPARAM, BOOL&);
 
 		LRESULT OnAddItem(int idCtrl, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/);
 	    LRESULT OnSelChanged(int idCtrl, LPNMHDR pnmh, BOOL& /*bHandled*/);
@@ -56,6 +58,7 @@ namespace FBT
 		// Model stuff
 		metadb_handle_list selectedTracks;
 		SelectionTreeModel* model;
+		SelectionToMatch* currentSelection;
 
 		// View stuff
 		HWND parentWindow;
@@ -63,8 +66,14 @@ namespace FBT
 		WTL::CListBox selectionTracksListBox;
 					
 		CPropertyGridCtrl selectionDataGrid;
+		pfc::chain_list_v2_t<ExtendedTagInfo*> addedTags;
+		// The subset of added tags which have been modified
+		pfc::chain_list_v2_t<ExtendedTagInfo*> addedModifiedTags;
+		
 
-
+		bool changesMadeToTags;
+		WTL::CButton applyTagsButton;
+		
 
 	};
 

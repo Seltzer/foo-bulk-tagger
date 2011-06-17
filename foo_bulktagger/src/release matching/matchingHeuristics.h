@@ -1,8 +1,7 @@
 #ifndef MATCHING_HEURISTICS_H_
 #define MATCHING_HEURISTICS_H_
 
-#include <vector>
-
+#include "../common.h"
 #include "potentialMatch.h"
 
 
@@ -16,7 +15,7 @@ namespace FBT
 	{
 
 	public:
-		virtual std::vector<PotentialMatch> FindMatches(const SelectionToMatch&) = 0;
+		virtual pfc::chain_list_v2_t<PotentialMatch> FindMatches(const SelectionToMatch&) = 0;
 
 	};
 
@@ -25,7 +24,7 @@ namespace FBT
 	{
 	
 	public:
-		virtual std::vector<PotentialMatch> FindMatches(const SelectionToMatch&);
+		virtual pfc::chain_list_v2_t<PotentialMatch> FindMatches(const SelectionToMatch&);
 	};
 
 

@@ -43,6 +43,9 @@
     <ClCompile Include="src\release matching\selection.cpp">
       <Filter>src\release matching</Filter>
     </ClCompile>
+    <ClCompile Include="src\release matching\selectionMetadata.cpp">
+      <Filter>src\release matching</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\release matching\matchingHeuristics.h">
@@ -76,6 +79,9 @@
       <Filter>src\release matching</Filter>
     </ClInclude>
     <ClInclude Include="src\release matching\selection.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\release matching\selectionMetadata.h">
       <Filter>src\release matching</Filter>
     </ClInclude>
   </ItemGroup>

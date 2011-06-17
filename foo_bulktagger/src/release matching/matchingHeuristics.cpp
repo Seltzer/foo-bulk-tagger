@@ -15,9 +15,9 @@ namespace FBT
 
 
 
-vector<PotentialMatch> MatchingHeuristicImpl::FindMatches(const SelectionToMatch& tracks)
+pfc::chain_list_v2_t<PotentialMatch> MatchingHeuristicImpl::FindMatches(const SelectionToMatch& tracks)
 {
-	vector<PotentialMatch> matches;
+	pfc::chain_list_v2_t<PotentialMatch> matches;
 
 	return matches;
 }

@@ -357,9 +357,14 @@ public:
       // Get default text
       UINT cchMax = GetDisplayValueLength() + 1;
       LPTSTR pszText = (LPTSTR) _alloca(cchMax * sizeof(TCHAR));
-      ATLASSERT(pszText);
-      if( !GetDisplayValue(pszText, cchMax) ) return NULL;
-      // Create EDIT control
+	  ATLASSERT(pszText);
+
+	  // Hack
+	  ::lstrcpyn(pszText, _T(""), cchMax);
+	  //if( !GetDisplayValue(pszText, cchMax) ) return NULL;
+      
+	  
+	  // Create EDIT control
       CPropertyEditWindow* win = new CPropertyEditWindow();
       ATLASSERT(win);
       RECT rcWin = rc;

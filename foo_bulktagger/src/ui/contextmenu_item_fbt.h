@@ -111,7 +111,6 @@ public:
 		{
 			case FetchTags:
 			{
-				console::printf("here we go");
 				// Should be unnecessary
 				pfc::dynamic_assert(p_data.get_size() > 0);
 
@@ -119,7 +118,6 @@ public:
 				FBT::SelectionDivisorByTags* divisor = new FBT::SelectionDivisorByTags(p_data);
 				divisor->DivideSelection();
 
-				console::printf("spawning dialog");
 				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor->GetTreeModel());
 
 				break;

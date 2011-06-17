@@ -67,9 +67,6 @@ void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 		console::printf("Dialog creation failed");
 
 	dialog->ShowWindow(SW_SHOW);
-
-	dialog->SendMessageW(dialog->operator HWND(), WM_TESTMSGLOOP, 0U, 0U);
-	dialog->PostMessageW(WM_TESTMSGLOOP, 0U, 0U);
 }
 
 

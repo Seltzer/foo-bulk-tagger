@@ -23,3 +23,4 @@
 #define STRING8_TO_LPCTSTR(input, maxLength, output)													\
 	wchar_t output[maxLength + 1];																		\
 	pfc::stringcvt::convert_utf8_to_wide(output,256, input.get_ptr(), input.length());
+

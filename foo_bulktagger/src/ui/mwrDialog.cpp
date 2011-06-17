@@ -14,7 +14,7 @@ namespace FBT
 
 	
 	MatchWithReleasesDialog::MatchWithReleasesDialog(SelectionTreeModel* model, HWND parent)
-		: model(model), parentWindow(parent)
+		: model(model), parentWindow(parent), changesMadeToTags(false), currentSelection(NULL)
 	{
 	}
 
@@ -28,7 +28,9 @@ namespace FBT
 		HWND listBoxHandle = GetDlgItem(IDC_SELECTIONTRACKS);
 		selectionTracksListBox.Attach(listBoxHandle);
 
-		console::printf("Dialog initiated");
+		HWND applyButtonHandle = GetDlgItem(IDC_APPLYTAGS);
+		applyTagsButton.Attach(applyButtonHandle);
+
 		return TRUE;
 	}
 		
@@ -73,7 +75,10 @@ namespace FBT
 	void MatchWithReleasesDialog::SetupPropertyGrids()
 	{
 		selectionDataGrid.SubclassWindow(GetDlgItem(IDC_SELECTIONDATA));
-		selectionDataGrid.SetExtendedGridStyle(PGS_EX_SINGLECLICKEDIT | PGS_EX_ADDITEMATEND);
+		selectionDataGrid.SetExtendedGridStyle(PGS_EX_SINGLECLICKEDIT);
+
+		selectionDataGrid.InsertColumn(0, _T("Tag Name"), LVCFMT_LEFT, 100, 0);
+		selectionDataGrid.InsertColumn(1, _T("Tag Values"), LVCFMT_LEFT, 200, 0);
 	}
 
 
@@ -96,8 +101,8 @@ namespace FBT
 		{
 			selectionTracksListBox.ResetContent();
 						
-			SelectionToMatch* selection = node->GetSelectionData();
-			const metadb_handle_list& tracks = selection->GetTracks();
+			currentSelection = node->GetSelectionData();
+			const metadb_handle_list& tracks = currentSelection->GetTracks();
 
 			file_info_impl trackInfo;
 			for (t_size i = 0; i < tracks.get_count(); i++)
@@ -120,21 +125,51 @@ namespace FBT
 				selectionTracksListBox.AddString(convertedDisplayString);
 			}
 
-			selection->GetMetaTableBuilder().UpdatePropertyGrid(selectionDataGrid);
+			currentSelection->GetMetaTableBuilder().UpdatePropertyGrid(selectionDataGrid);
+			selectionDataGrid.SetExtendedGridStyle(PGS_EX_SINGLECLICKEDIT | PGS_EX_ADDITEMATEND);
 		}
+		else
+		{
+			currentSelection = NULL;
+
+			selectionDataGrid.SetExtendedGridStyle(PGS_EX_SINGLECLICKEDIT);
+
+			while(selectionDataGrid.GetItemCount())
+				selectionDataGrid.DeleteItem(0);
+		}
+
+		changesMadeToTags = false;
+		applyTagsButton.EnableWindow(false);
+
 		
 		return 0L;
 	}
 		
 	LRESULT MatchWithReleasesDialog::OnAddItem(int idCtrl, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/)
 	{
-		ATLTRACE(_T("OnAddItem - Ctrl: %d\n"), idCtrl); idCtrl;
+		// Build tag info for new item
+		ExtendedTagInfo* tagInfo = new ExtendedTagInfo();
+		tagInfo->realTagName = pfc::string8("tag name");
+		tagInfo->realTagValues.insert_last(pfc::string8("<tag value>"));
+		tagInfo->isStandardTag = true;
+		tagInfo->hasMultipleValuesProperty = false;
+		tagInfo->isDirty = true;
+		tagInfo->GenerateDecoratedValues();
+		
+		// Create tag name property	
+		HPROPERTY tagNameProperty = PropCreateSimple(_T("key"), _T("<tag name>"));
+		tagNameProperty->SetItemData((LPARAM) tagInfo);
+		int row = selectionDataGrid.InsertItem(-1, tagNameProperty);
+		tagInfo->index = row;
+		
+		HPROPERTY tagValuesProperty = PropCreateSimple(_T("value"), _T("<tag value>"));
+		tagValuesProperty->SetItemData((LPARAM) tagInfo);
+		selectionDataGrid.SetSubItem(row, 1, tagValuesProperty);
+		selectionDataGrid.SelectItem(row);
 
-		int i = selectionDataGrid.InsertItem(-1, PropCreateReadOnlyItem(_T(""), _T("Dolly")));
-		selectionDataGrid.SetSubItem(i, 1, PropCreateSimple(_T(""), true));
-		selectionDataGrid.SetSubItem(i, 2, PropCreateCheckButton(_T(""), false));
-		selectionDataGrid.SetSubItem(i, 3, PropCreateSimple(_T(""), _T("")));
-		selectionDataGrid.SelectItem(i);
+		// Don't inform the SelectionToMatch of the added tag until as late as possible
+		addedTags.insert_last(tagInfo);
+
 		return 0;
 	}
 
@@ -149,30 +184,74 @@ namespace FBT
 		CComVariant vValue;
 		pnpi->prop->GetValue(&vValue);
 		vValue.ChangeType(VT_BSTR);
-		
-		ATLTRACE(_T("OnSelChanged - Ctrl: %d, Name: '%s', DispValue: '%s', Value: '%ls'\n"),
-					idCtrl, pnpi->prop->GetName(), szValue, vValue.bstrVal); idCtrl;
 		return 0;
 	}
 
 	LRESULT MatchWithReleasesDialog::OnItemChanged(int idCtrl, LPNMHDR pnmh, BOOL& /*bHandled*/)
 	{
 		LPNMPROPERTYITEM pnpi = (LPNMPROPERTYITEM) pnmh;
+		
+		// Grab value and convert it to UTF-8
 		TCHAR szValue[100] = { 0 };
 		pnpi->prop->GetDisplayValue(szValue, sizeof(szValue)/sizeof(TCHAR));
+		char convertedValue[256];
+		pfc::stringcvt::convert_wide_to_utf8(convertedValue, 256, szValue, 256);
+
+				
+		ExtendedTagInfo* tagInfo = (ExtendedTagInfo*) pnpi->prop->GetItemData();
+		
+		// Update tag info
+		// First, work out whether the changed property is a tag name or tag values
+		if (::lstrcmpiW(pnpi->prop->GetName(), _T("key")) == 0)
+		{
+			tagInfo->realTagName = pfc::string8(convertedValue);
+		}
+		else if (::lstrcmpiW(pnpi->prop->GetName(), _T("value")) == 0)
+		{
+			tagInfo->realTagValues.remove_all();
+			pfc::splitStringByChar<pfc::chain_list_v2_t<pfc::string8> >(tagInfo->realTagValues, convertedValue, ';');
+		}
+		else
+		{
+			pfc::dynamic_assert(false);
+		}
+
+		tagInfo->isStandardTag = true;
+		tagInfo->hasMultipleValuesProperty = false;
+		tagInfo->isDirty = true;
+		tagInfo->GenerateDecoratedValues();
+		
+
+
+		// If this is an added tag
+		if (addedTags.find_item(tagInfo).is_valid())
+		{
+			// And it hasn't been marked as modified
+			if (!addedModifiedTags.find_item(tagInfo).is_valid())
+			{
+				// Mark it as modified
+				addedModifiedTags.insert_last(tagInfo);
+			}
+		}
+
+
+		// Update Apply Tags button
+		changesMadeToTags = true;
+		applyTagsButton.EnableWindow();
+
+
 		CComVariant vValue;
 		pnpi->prop->GetValue(&vValue);
 		vValue.ChangeType(VT_BSTR);
-		
-		ATLTRACE(_T("OnItemChanged - Ctrl: %d, Name: '%s', DispValue: '%s', Value: '%ls'\n"),
-						idCtrl, pnpi->prop->GetName(), szValue, vValue.bstrVal); idCtrl;
 		return 0;
 	}
 
-
-	LRESULT MatchWithReleasesDialog::TestMsgLoop(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
+	LRESULT MatchWithReleasesDialog::OnApplyTags(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 	{
-		console::print("Message loop is working");
+		pfc::dynamic_assert(currentSelection != NULL);
+
+		currentSelection->WriteTags(addedModifiedTags, this->operator HWND());
+		
 		return 0;
 	}
 }

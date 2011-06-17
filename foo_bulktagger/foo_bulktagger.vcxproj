@@ -124,6 +124,7 @@
     <ClCompile Include="src\release matching\matchingHeuristics.cpp" />
     <ClCompile Include="src\release matching\selection.cpp" />
     <ClCompile Include="src\release matching\selectionDivision.cpp" />
+    <ClCompile Include="src\release matching\selectionMetadata.cpp" />
     <ClCompile Include="src\release matching\selectionTreeModel.cpp" />
     <ClCompile Include="src\ui\mwrDialog.cpp" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="src\release matching\potentialMatch.h" />
     <ClInclude Include="src\release matching\selection.h" />
     <ClInclude Include="src\release matching\selectionDivision.h" />
+    <ClInclude Include="src\release matching\selectionMetadata.h" />
     <ClInclude Include="src\release matching\selectionTreeModel.h" />
     <ClInclude Include="src\ui\contextmenu_item_fbt.h" />
     <ClInclude Include="src\ui\mwrDialog.h" />

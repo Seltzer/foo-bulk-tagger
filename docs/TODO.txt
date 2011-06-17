@@ -5,17 +5,27 @@ TODO
 MatchWithReleases Stuff:
 
 * Add popups for tracks which show their metadata
-* Maybe it'd be a better idea to divide track selections according to the user's current Foobar
-  division. If not, still have to add folder location
 * Releases to Match treeview:
 	- Decide whether to allow non-leaf nodes to be clickable. If they're clickable they should
 	  probably trigger changes in the track listbox too.
 	- Decide whether we want to show the root node
+	- Empty strings aren't handled properly
+	- Refresh when we update tags
+	- Refresh when anything updates tags
+	- Maybe it'd be a better idea to divide track selections according to the user's current Foobar
+		division. If not, still have to add folder location
 * Matching heuristics:
 	- Look into track fingerprinting
 * Property Grid for metadata
 	- Erase when a new selection is made
-	- Allow writing to tags
+	- Detect duplicate tags
+	- Fix weird UI semantics for release/track selection
+	- Trim tags
+	- Show standard tags, even if they don't exist
+	- Make more like Foobar properties window... edits apply straight away without enter
+	- Consider whether data might be stale
+* Remove memory leaks
+* Make more robust with regard to closing/reopening
 
 
 
@@ -26,6 +36,7 @@ Altering Releases Stuff:
 Misc:
 * Database of common searches
 * Improve efficiency (i.e. in SelectionTreeView) by caching results of previous queries
+* Store strings somewhere
 
 Learning:
 
