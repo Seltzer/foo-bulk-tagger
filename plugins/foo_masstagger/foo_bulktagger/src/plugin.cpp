@@ -18,7 +18,6 @@ namespace FBT
 
 Plugin* Plugin::pluginInstance (NULL);
 
-CAppModule _Module;
 
 
 Plugin* Plugin::GetInstance()
@@ -32,11 +31,6 @@ Plugin* Plugin::GetInstance()
 void Plugin::ShowWindow() {
 	
 	cfg_enabled = true;
-
-	/*
-	if (!g_instance.IsWindow()) {
-		cfg_enabled = (g_instance.Create(core_api::get_main_window()) != NULL);
-	}*/
 }
 
 void Plugin::HideWindow() {
@@ -54,14 +48,7 @@ void Plugin::HideWindow() {
 Plugin::Plugin()
 	: initialised(false)
 {
-	//console::printf("hello - initialised resides at %d", &initialised);
-
-	//console::printf("before start");
-	//start();
-	//console::printf("before while loop");
-	
-	//while(!initialised);
-	//console::printf("after while loop");
+	// previously the src of all evil
 }
 
 
@@ -72,99 +59,20 @@ Plugin::~Plugin()
 }
 
 
-void Plugin::SpawnMatchWithReleasesDialog()
-{
-	MSG msg;
-	
-	//MWRDialog* dialog = new MWRDialog(core_api::get_main_window());
-
-	/*
-	CMyWindow window;
-
-	
-
-    // Create our main window
-    //if ( NULL == dialog->Create ( core_api::get_main_window(), CWindow::rcDefault, _T("My First ATL Window") ))
-	
-
-
-
-	window.Create(core_api::get_main_window(), CWindow::rcDefault, NULL);
-
-	window.ShowWindow(SW_SHOW);
-	window.EnableWindow();
-	window.UpdateWindow();*/
-	
-
-
-	MWRDialog* dialog = new MWRDialog();
-	
-	if ( NULL == dialog->Create ( NULL, CWindow::rcDefault, NULL))
-		console::printf("fuck you");
-
-    dialog->ShowWindow(SW_SHOW);
-	dialog->SetFocus();
-	dialog->EnableWindow();
-	dialog->UpdateWindow();
-	
-	//wndMain.operator HWND
-
-    // Your standard Win32 message loop:
-    while ( GetMessage ( &msg, NULL, 0, 0 ) > 0 )
-        {
-        TranslateMessage ( &msg );
-        DispatchMessage ( &msg );
-        }
-
-	
-	/* CMessageLoop theLoop;
-    _Module.AddMessageLoop(&theLoop);
-
-	MWRDialog* dialog = new MWRDialog(core_api::get_main_window());
-	dialog->create(core_api::get_main_window());
-    //wndMain.ShowWindow(nCmdShow);
-
-	int nRet = theLoop.Run();
-
-    _Module.RemoveMessageLoop();*/
- 
-//_Module.Term();
-	//return msg.wParam;
-
-	/*
-	if (dialog->create(IDD_MWRDIALOG, core_api::get_main_window()))
-	{
-		console::printf("success");
-	}
-	else
-	{
-		console::printf("massive fail");
-	}*/
-
-
-
-	//MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
-	//runner->start();
-}
-
 void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 {
-	//MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
-	//runner->start();
-	//
+	MatchWithReleasesDialog* dialog = new MatchWithReleasesDialog(model, core_api::get_main_window());
+
+	//if (!dialog->Create(core_api::get_main_window()))
+	if (!dialog->Create(NULL))
+		console::printf("Dialog creation failed");
+
+	dialog->ShowWindow(SW_SHOW);
+
+	dialog->SendMessageW(dialog->operator HWND(), WM_TESTMSGLOOP, 0U, 0U);
+	dialog->PostMessageW(WM_TESTMSGLOOP, 0U, 0U);
 }
 
-void Plugin::run()
-{
-	int argc(0);
-	//app = new QApplication(argc,NULL);
-	
-	initialised = true;
-
-	//console::printf("hello - initialised resides at %d", &initialised);
-
-	//app->exec();
-}
 
 
 

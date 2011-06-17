@@ -1,6 +1,6 @@
 #include "selectionDivision.h"
 #include "matchingHeuristics.h"
-//#include "selectionTreeModel.h"
+#include "selectionTreeModel.h"
 
 using namespace std;
 
@@ -76,24 +76,33 @@ SelectionDivisorByTags::SelectionDivisorByTags(const metadb_handle_list& initSel
 
 void SelectionDivisorByTags::DivideSelection()
 {
-	/*
 	treeModel = new SelectionTreeModel();
-	treeModel->FetchOrCreate("The Smiths", "Meat is Murder");
-	treeModel->FetchOrCreate("The Smiths", "Meat is Murder");
-	treeModel->FetchOrCreate("The Smiths", "Meat is Murder");
-	treeModel->FetchOrCreate("The Smiths", "The Queen is Dead");
-	treeModel->FetchOrCreate("The Smiths", "Strangeways");
-	treeModel->FetchOrCreate("Liars", "Sisterworld");
-	
+
+		
+	file_info_impl trackInfo;
+
 	for (int i = 0; i < selection.get_count(); i++)
 	{
-		//metadb_handle_ptr
-		//treeModel->FetchOrCreate()
+		metadb_handle_ptr trackPtr = selection.get_item(i);
+
+		if (trackPtr->get_info(trackInfo))
+		{
+			const char* artist = trackInfo.meta_get("Artist",0);
+			const char* album = trackInfo.meta_get("Album",0);
+
+			if (!artist || !album)
+			{
+				console::printf("couldn't get track info");
+				continue;
+
+			}
+				
+			treeModel->FetchOrCreate(artist, album);
+		}
 	}
 
-	//treeModel->AppendArtist(topNode1);
-	//treeModel->AppendArtist(topNode2);
-	*/
+	treeModel->SortTreeAlphabetically();
+	
 }
 
 SelectionTreeModel* SelectionDivisorByTags::GetTreeModel()

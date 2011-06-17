@@ -8,6 +8,8 @@
 #define COMPONENT_NAME_MINIMAL "Bulk Tagger"
 
 
+#define WM_TESTMSGLOOP WM_USER + 1
+
 
 
 // Keystroke friendly print macro

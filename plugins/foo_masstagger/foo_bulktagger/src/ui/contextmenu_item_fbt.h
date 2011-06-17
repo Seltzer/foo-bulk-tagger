@@ -120,11 +120,8 @@ public:
 				divisor->DivideSelection();
 
 				console::printf("spawning dialog");
-				//FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor->GetTreeModel());
-				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog();
-				
+				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor->GetTreeModel());
 
-	
 				break;
 			}
 			case Config:
