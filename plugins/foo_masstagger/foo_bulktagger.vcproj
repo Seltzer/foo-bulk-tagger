@@ -259,6 +259,52 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="release matching"
+				>
+				<File
+					RelativePath=".\src\release matching\matchingHeuristics.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\release matching\matchingHeuristics.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\release matching\potentialMatch.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\release matching\selectionDivision.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\release matching\selectionDivision.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(SolutionDir)\depends\libmusicbrainz-3.0.2\include&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; -D_UNICODE -D_USRDLL -D_WINDLL -D_WINDOWS -DFOO_TUTORIAL1_EXPORTS -DNDEBUG -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I.&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-ID:\Foobar\plugins\foo_masstagger\depends\libmusicbrainz-3.0.2\include&quot; \qtmain&quot; -D_DEBUG -D_UNICODE -D_USRDLL -D_WINDLL -D_WINDOWS -DFOO_TUTORIAL1_EXPORTS -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DTEST_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="docs"
@@ -286,12 +332,36 @@
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_selectionDivision.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
 			</Filter>
 			<Filter
 				Name="Debug"
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_selectionDivision.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
 			</Filter>
 		</Filter>
 		<File

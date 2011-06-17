@@ -4,21 +4,31 @@
 
 #include <QFrame>
 
+class QTreeView;
 
 
-class MatchWithReleasesDialog : public QFrame
+namespace FBT
 {
-
-public:
-	MatchWithReleasesDialog();
-
-private:
-	metadb_handle_list selectedTracks;
-	//vector<MusicBrainzRelease> candidateMatches;
-};
+	class TreeModel;
 
 
+	class MatchWithReleasesDialog : public QFrame
+	{
 
+	public:
+		MatchWithReleasesDialog();
+		MatchWithReleasesDialog(TreeModel*);
+
+	private:
+		metadb_handle_list selectedTracks;
+		//vector<MusicBrainzRelease> candidateMatches;
+
+		TreeModel* model;
+		QTreeView* view;
+	};
+
+
+}
 
 #endif
 

@@ -1,6 +1,11 @@
 #include "../common.h"
-
 #include "matchWithReleasesDialog.h"
+#include "../selectionDivision.h"
+#include <QTreeView>
+
+
+namespace FBT
+{
 
 
 
@@ -17,9 +22,35 @@ MatchWithReleasesDialog::MatchWithReleasesDialog()
 	setFixedSize(400,300);
 }
 
+MatchWithReleasesDialog::MatchWithReleasesDialog(TreeModel* model)
+	: model(model)
+{
+	setWindowTitle("Match Dialog");
+
+	// TODO wasteful
+	//this->palette().setColor(QPalette::Background, QColor(0, 0, 0));
+	//setPalette(palette);
+	setAutoFillBackground(true);
+
+	setFixedSize(400,300);
+
+	
+	view = new QTreeView(this);
+
+	QAbstractItemModel* modelCast = (QAbstractItemModel*) model;
+	console::printf("successful cast");
+	view->setModel(modelCast);
+		
+	view->move(10,10);
+	view->resize(200,200);
+	
+
+}
 
 
 
+
+}
 
 
 

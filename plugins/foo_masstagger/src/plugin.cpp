@@ -11,12 +11,18 @@
 
 
 
+
+
+
+
+namespace FBT
+{
+
+
+
 // Static Displayer fields
 Plugin* Plugin::pluginInstance (NULL);
 //QFont* Displayer::defaultFont(NULL);
-
-
-
 
 
 
@@ -81,6 +87,14 @@ void Plugin::SpawnMatchWithReleasesDialog()
 }
 
 
+void Plugin::SpawnMatchWithReleasesDialog(TreeModel* model)
+{
+	MatchWithReleasesDialog* newDialog = new MatchWithReleasesDialog(model);
+	matchDialogs.push_back(newDialog);
+	newDialog->show();
+}
+
+
 /*
 const QFont& Displayer::GetDefaultFont()
 {
@@ -140,5 +154,13 @@ void Plugin::run()
 	app->exec();
 }
 
+
+
+
+
+
+
+
+}
 
 

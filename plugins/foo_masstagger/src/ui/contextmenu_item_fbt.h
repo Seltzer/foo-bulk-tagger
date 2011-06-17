@@ -1,23 +1,11 @@
 #ifndef _CONTEXTMENU_ITEM_FBT_H_
 #define _CONTEXTMENU_ITEM_FBT_H_
 
-
+#include <iostream>
 #include "../../SDK/foobar2000.h"
-
-#include <musicbrainz3/webservice.h>
-#include <musicbrainz3/query.h>
-#include <musicbrainz3/model.h>
-
-
 #include "common.h"
 #include "../plugin.h"
-
-
-#include <iostream>
-
-using namespace MusicBrainz;
-using namespace std;
-
+#include "release matching/selectionDivision.h"
 
 
 
@@ -109,21 +97,110 @@ public:
 
 	void context_command(unsigned p_index,const pfc::list_base_const_t<metadb_handle_ptr>& p_data,const GUID& p_caller)
 	{
-		WHERES_WALLY
-
 		unsigned displayflags;
 		pfc::string8 out;
 		context_get_display(p_index, p_data, out, displayflags, p_caller);
-		if(displayflags & FLAG_GRAYED) return ;
+
+		if(displayflags & FLAG_GRAYED) 
+			return;
 		
-			
-		console::printf("%d items selected", p_data.get_size());
+
+
+		switch (p_index) 
+		{
+			case FetchTags:
+			{
+				// Should be unnecessary
+				pfc::dynamic_assert(p_data.get_size());
+
+				// Divide selected tracks into releases
+				FBT::SelectionDivisorByTags divisor(p_data);
+				divisor.DivideSelection();
+
+				divisor.GetSelectionDivisions();
+
+				FBT::TreeItem* topNode1 = new FBT::TreeItem("tn1");
+				FBT::TreeItem* topNode2 = new FBT::TreeItem("tn2");
+				FBT::TreeItem* aNode = new FBT::TreeItem("aaa", topNode1);
+				topNode1->appendChild(aNode);
+				FBT::TreeItem* bNode = new FBT::TreeItem("bbb", topNode1);
+				topNode1->appendChild(bNode);
+				FBT::TreeItem* cNode = new FBT::TreeItem("ccc", topNode2);
+				topNode2->appendChild(cNode);
+
+				FBT::TreeItem* dNode = new FBT::TreeItem("ddd", aNode);
+				aNode->appendChild(dNode);
+				FBT::TreeItem* eNode = new FBT::TreeItem("eee", aNode);
+				aNode->appendChild(eNode);
+				FBT::TreeItem* fNode = new FBT::TreeItem("fff", aNode);
+				aNode->appendChild(fNode);
+
+				FBT::TreeItem* gNode = new FBT::TreeItem("ggg", dNode);
+				dNode->appendChild(gNode);
+
+
+
+				FBT::TreeModel* model = new FBT::TreeModel();
+				model->AddToRoot(topNode1);
+				model->AddToRoot(topNode2);
+
+				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(model);
+
+				break;
+			}
+			case Config:
+			break;
+		}
+	}
+
+	bool context_get_display(unsigned p_index, const pfc::list_base_const_t<metadb_handle_ptr>& p_data, 
+							pfc::string_base& p_out, unsigned& p_displayflags, const GUID& p_caller) 
+	{
+		WHERES_WALLY
 		
+		PFC_ASSERT(p_index >= 0 && p_index < get_num_items());
+		get_item_name(p_index,p_out);
+
+		switch (p_index) 
+		{
+			case FetchTags:
+				p_displayflags = 0;
+			break;
+
+			case Config:
+				p_displayflags = 0;
+			break;
+		}
+
+		return true;
+	}
+};
+
+static contextmenu_item_factory_t<contextmenu_fbt> contextmenu_fbt_factory;
+
+#endif // _CONTEXTMENU_ITEM_FBT_H_
+
+
+
+
+
+
+
+
+/*
+
+
 
 		file_info_impl info;	
 		switch (p_index) 
 		{
 			case FetchTags:
+
+				console::printf("size of p_data = %d", p_data.get_size());
+
+				pfc::dynamic_assert(p_data.get_size());
+
+
 				if (p_data[0]->get_info(info))
 				{
 					const char* field = info.meta_get("Artist",0);
@@ -193,18 +270,17 @@ public:
 					{
 						console::printf("caught exception");
 					}
-					/*
+					
 					catch (std::exception& e)
 					{
 						console::error("exception2");
-					}*/
+					}
 
-					console::printf("here3 i am!");
 
 					// No error occurred, so display the results of the search. It consists of
 					// ArtistResult objects, where each contains an artist.
 	
-					/*
+					
 					for (ArtistResultList::iterator i = results.begin(); i != results.end(); i++) 
 					{
 						ArtistResult *result = *i;
@@ -216,40 +292,16 @@ public:
 						cout << "Name    : " << artist->getName() << endl;
 						cout << "SortName: " << artist->getSortName() << endl;
 						cout << endl;
-					}*/
+					}
 				}
-			break;
-		
-			case Config:
-				//g_discogs.update_tags_dialog =
-				//	new update_tags_dialog(IDD_DIALOG_UPDATE_TAGS, core_api::get_main_window(), p_data);
-			break;
-		}
-	}
 
-	bool context_get_display(unsigned p_index, const pfc::list_base_const_t<metadb_handle_ptr>& p_data, 
-							pfc::string_base& p_out, unsigned& p_displayflags, const GUID& p_caller) 
-	{
-		WHERES_WALLY
-		
-		PFC_ASSERT(p_index >= 0 && p_index < get_num_items());
-		get_item_name(p_index,p_out);
+				
 
-		switch (p_index) 
-		{
-			case FetchTags:
-				p_displayflags = 0;
-			break;
+*/
 
-			case Config:
-				p_displayflags = 0;
-			break;
-		}
 
-		return true;
-	}
-};
 
-static contextmenu_item_factory_t<contextmenu_fbt> contextmenu_fbt_factory;
 
-#endif // _CONTEXTMENU_ITEM_FBT_H_
+
+
+

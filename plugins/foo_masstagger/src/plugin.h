@@ -6,48 +6,56 @@
 #include "common.h"
 
 #include <vector>
+#include "release matching/selectionDivision.h"
 #include <QFont>
 #include <QThread>
 
 class QApplication;
-class MatchWithReleasesDialog;
 
 
 
-
-class Plugin : public QThread
+namespace FBT
 {
+	class MatchWithReleasesDialog;
 
-public:
 
-	static Plugin* GetInstance();
-	
-	static void ShowWindow();
-	static void HideWindow();
-	
-	// QThread override
-	virtual void run();
+	class Plugin : public QThread
+	{
 
-	void SpawnMatchWithReleasesDialog();
+	public:
+
+		static Plugin* GetInstance();
 		
-	
-	//static const QFont& GetDefaultFont();
-	//static QFont* defaultFont;
+		static void ShowWindow();
+		static void HideWindow();
+		
+		// QThread override
+		virtual void run();
 
-private:
-	static Plugin* pluginInstance;
+		void SpawnMatchWithReleasesDialog();
+		void SpawnMatchWithReleasesDialog(TreeModel*);
+			
+		
+		//static const QFont& GetDefaultFont();
+		//static QFont* defaultFont;
 
-	// Initialisation/Destruction
-	Plugin();
-	~Plugin();
+	private:
+		static Plugin* pluginInstance;
 
-	QApplication* app;
+		// Initialisation/Destruction
+		Plugin();
+		~Plugin();
 
-	bool initialised;	
+		QApplication* app;
 
-	std::vector<MatchWithReleasesDialog*> matchDialogs;
+		bool initialised;	
 
-};
+		std::vector<MatchWithReleasesDialog*> matchDialogs;
+
+	};
+
+}
+
 
 
 
