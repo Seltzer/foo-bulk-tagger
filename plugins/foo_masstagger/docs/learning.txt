@@ -1,0 +1,32 @@
+ATL Tutorial:
+
+Curiously recurring template pattern
+ATL Windows including message maps, declarations and traits
+	Note that windows are not destroyed when CWindow goes out of scope
+Event-handlers (BHANDLED and parameter unpacking)
+Chaining in message maps to support mix-in classes
+Implementation of ATL windows/dialogs (including dialog resource IDs)
+	
+	
+WTL 1:
+
+
+Header includes and #defines, different classes, 
+DECLARE_FRAME_WND_CLASS which loads other resources based on an ID
+CreateWindow/CreateWindowEx
+Slightly different message maps to ATL - MSG_WM_CREATE instead of MESSAGE_HANDLER... still use COMMAND_ID_HANDLER_EX
+
+Clock Example:
+	- Architecture with View Window inside Main Frame
+	- CIdleHandler (OnIdle())
+	- CMessageFilter (PreTranslateMessage())
+		CMessageLoop synopsis
+	- CUpdateUI
+
+
+WTL 2:
+
+
+
+WTL 3:
+	- Controls, 3 ATL ways, WTL DDX macros

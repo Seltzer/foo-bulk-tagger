@@ -1,0 +1,7 @@
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/ALL_BUILD.dir
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/ZERO_CHECK.dir
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/discid.dir
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/dist.dir
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/docs.dir
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/libdiscid.dir
+D:/Foobar/plugins/foo_masstagger/depends/o_libdiscid/CMakeFiles/test_discid.dir

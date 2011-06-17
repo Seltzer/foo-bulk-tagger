@@ -1,0 +1,38 @@
+Tagger
+
+* Match artist/album or MusicBrainz ID to a release in MusicBrainz DB (report on success)
+* Once matched, preview tag changes, allow user to deselect changes, alert user of radical changes, allow user to change changes
+
+Additional features:
+* Search for album art on RYM/?/? and overwrite/embed existing album art
+	Warn about large album art
+* Erase standard/custom tags (after matching on MusicBrainz?)
+* Check style conformance of tags - punctuation, 
+* Tags -> Filenames feature with custom mappings for tabu filename chars
+* Garbage removal feature (files)
+* Copy/swap tags feature (i.e. copy artist to album artist if not compilation)
+* Construct standard/custom tags using masks?? - have legal values and tabu values
+* Bitrate checker
+* Genre finder
+* Incomplete albums
+* Compilation finder - filestube.com
+
+
+
+Dependencies arranged into a process
+
+1 - look on musicbrainz
+2 - blank out tags, apply musicbrainz tags
+3 - WARNING - bitrate checker, incomplete albums, dodgy conformance to style (i.e. punctuation)
+4 - copy/swap tags feature
+
+5 - genre finder
+6 - file garbage removal
+7 - album art finder
+8 - tags -> filenames 
+
+1 - compilation finder
+
+
+Questions:
+Does MusicBrainZ have lyrics?

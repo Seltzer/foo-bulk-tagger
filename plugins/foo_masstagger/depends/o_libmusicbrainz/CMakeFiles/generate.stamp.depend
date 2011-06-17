@@ -1,0 +1,28 @@
+# CMake generation dependency list for this directory.
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/CMakeLists.txt
+D:/Foobar/plugins/foo_masstagger/depends/o_libmusicbrainz/CMakeFiles/CMakeSystem.cmake
+D:/Foobar/plugins/foo_masstagger/depends/o_libmusicbrainz/CMakeFiles/CMakeCCompiler.cmake
+D:/Foobar/plugins/foo_masstagger/depends/o_libmusicbrainz/CMakeFiles/CMakeCXXCompiler.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeGenericSystem.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/Platform/Windows.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/Platform/WindowsPaths.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeCInformation.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/Platform/Windows-cl.cmake
+D:/Foobar/plugins/foo_masstagger/depends/o_libmusicbrainz/CMakeFiles/CMakeCPlatform.cmake
+D:/Foobar/plugins/foo_masstagger/depends/o_libmusicbrainz/CMakeFiles/CMakeCXXPlatform.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/Platform/cl.cmake
+D:/Foobar/plugins/foo_masstagger/depends/o_libmusicbrainz/CMakeFiles/CMakeRCCompiler.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeRCInformation.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeCXXInformation.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/cmake/modules/FindNeon.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/UsePkgConfig.cmake
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/cmake/modules/FindCppUnit.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/UsePkgConfig.cmake
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/cmake/modules/FindDiscId.cmake
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/UsePkgConfig.cmake
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/libmusicbrainz3.pc.cmake
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/Doxyfile.cmake
+D:/Foobar/plugins/foo_masstagger/depends/libmusicbrainz-3.0.2/config.h.cmake

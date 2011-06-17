@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="libdiscid"
+	ProjectGUID="{E971D184-C3F6-4FE0-9CFB-0530D097BD5D}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="libdiscid.dir\Debug"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				BasicRuntimeChecks="3"
+				CompileAs="1"
+				DebugInformationFormat="3"
+				ExceptionHandling="0"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				RuntimeLibrary="3"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,CMAKE_INTDIR=\&quot;Debug\&quot;,libdiscid_EXPORTS"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Debug/discid.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,CMAKE_INTDIR=\&quot;Debug\&quot;,libdiscid_EXPORTS"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,CMAKE_INTDIR=\&quot;Debug\&quot;,libdiscid_EXPORTS"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  winmm.lib "
+				OutputFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Debug\discid.dll"
+				Version="0.0"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Debug\discid.pdb"
+				GenerateDebugInformation="TRUE"
+				ImportLibrary="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Debug\discid.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="libdiscid.dir\Release"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				CompileAs="1"
+				ExceptionHandling="0"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				RuntimeLibrary="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;Release\&quot;,libdiscid_EXPORTS"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Release/discid.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;Release\&quot;,libdiscid_EXPORTS"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;Release\&quot;,libdiscid_EXPORTS"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  winmm.lib "
+				OutputFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Release\discid.dll"
+				Version="0.0"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Release\discid.pdb"
+				ImportLibrary="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\Release\discid.lib"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="MinSizeRel"
+			IntermediateDirectory="libdiscid.dir\MinSizeRel"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				CompileAs="1"
+				ExceptionHandling="0"
+				InlineFunctionExpansion="1"
+				Optimization="1"
+				RuntimeLibrary="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;,libdiscid_EXPORTS"
+				AssemblerListingLocation="MinSizeRel"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\MinSizeRel/discid.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;,libdiscid_EXPORTS"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;,libdiscid_EXPORTS"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  winmm.lib "
+				OutputFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\MinSizeRel\discid.dll"
+				Version="0.0"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\MinSizeRel\discid.pdb"
+				ImportLibrary="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\MinSizeRel\discid.lib"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="RelWithDebInfo"
+			IntermediateDirectory="libdiscid.dir\RelWithDebInfo"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				CompileAs="1"
+				DebugInformationFormat="3"
+				ExceptionHandling="0"
+				InlineFunctionExpansion="1"
+				Optimization="2"
+				RuntimeLibrary="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;,libdiscid_EXPORTS"
+				AssemblerListingLocation="RelWithDebInfo"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\RelWithDebInfo/discid.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;,libdiscid_EXPORTS"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;,libdiscid_EXPORTS"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  winmm.lib "
+				OutputFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\RelWithDebInfo\discid.dll"
+				Version="0.0"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\RelWithDebInfo\discid.pdb"
+				GenerateDebugInformation="TRUE"
+				ImportLibrary="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\RelWithDebInfo\discid.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule D:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files (x86)\CMake 2.8\bin\cmake.exe&quot; -HD:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2 -BD:/Foobar/plugins/foo_masstagger/depends/o_libdiscid --check-stamp-file D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeSystem.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCCompiler.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCPlatform.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\libdiscid.pc.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\Doxyfile.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;"
+					Outputs="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule D:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files (x86)\CMake 2.8\bin\cmake.exe&quot; -HD:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2 -BD:/Foobar/plugins/foo_masstagger/depends/o_libdiscid --check-stamp-file D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeSystem.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCCompiler.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCPlatform.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\libdiscid.pc.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\Doxyfile.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;"
+					Outputs="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule D:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files (x86)\CMake 2.8\bin\cmake.exe&quot; -HD:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2 -BD:/Foobar/plugins/foo_masstagger/depends/o_libdiscid --check-stamp-file D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeSystem.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCCompiler.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCPlatform.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\libdiscid.pc.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\Doxyfile.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;"
+					Outputs="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule D:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files (x86)\CMake 2.8\bin\cmake.exe&quot; -HD:/Foobar/plugins/foo_masstagger/depends/libdiscid-0.2.2 -BD:/Foobar/plugins/foo_masstagger/depends/o_libdiscid --check-stamp-file D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeSystem.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCCompiler.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCPlatform.cmake;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\libdiscid.pc.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\Doxyfile.in;D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\CMakeLists.txt;"
+					Outputs="D:\Foobar\plugins\foo_masstagger\depends\o_libdiscid\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\src\disc_win32.c">
+			</File>
+			<File
+				RelativePath="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\src\disc_win32_new.c">
+			</File>
+			<File
+				RelativePath="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\src\base64.c">
+			</File>
+			<File
+				RelativePath="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\src\disc.c">
+			</File>
+			<File
+				RelativePath="D:\Foobar\plugins\foo_masstagger\depends\libdiscid-0.2.2\src\sha1.c">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

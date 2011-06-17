@@ -1,0 +1,10 @@
+Process:
+
+Place archives for libdiscid, neon and libmusicbrainz in a depends subdir
+Build libdiscid sln by running cmake over it - output to o_libdiscid
+Open libdiscid sln and build it
+Build neon by running nmake /f the .mak file
+Run CMake over libmusicbrainz and output to o_libmusicbrainz to produce sln
+Open sln - make musicbrainz3 link against Ws2_32.lib, build
+
+discid.dll and musicbrainz3.dll must be copied to the foobar dir
