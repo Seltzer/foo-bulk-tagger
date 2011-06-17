@@ -104,6 +104,8 @@ void SelectionTreeNode::SetParent(SelectionTreeNode* parentNode)
 
 SelectionTreeNode* SelectionTreeNode::ChildAt(int row)
 {
+	pfc::dynamic_assert(row < childNodes.size()); 
+
 	return childNodes[row];
 }
 
@@ -157,8 +159,16 @@ unsigned SelectionTreeModel::ArtistCount() const
 }
 
 
-SelectionToMatch* SelectionTreeModel::FetchOrCreate(const pfc::string8& artistName, const pfc::string8& albumName)
+SelectionToMatch* SelectionTreeModel::FetchOrCreate(const pfc::string8& artistNameInput, const pfc::string8& albumNameInput)
 {
+	pfc::string8 artistName = artistNameInput;
+	if (artistName.is_empty())
+		artistName = "?";
+	pfc::string8 albumName = albumNameInput;
+	if (albumName.is_empty())
+		pfc::dynamic_assert(false);
+
+	
 	SelectionTreeNode* artist = GetArtist(artistName);
 	SelectionTreeNode* album = NULL;
 
@@ -185,7 +195,67 @@ SelectionToMatch* SelectionTreeModel::FetchOrCreate(const pfc::string8& artistNa
 		artist->AppendChild(album);
 	}
 
+	pfc::dynamic_assert(album->HasSelectionData());
 	return album->GetSelectionData();
+}
+
+SelectionToMatch* SelectionTreeModel::FetchOrCreate(const pfc::string8& artistNameInput, 
+										 		    const pfc::string8& albumNameInput, 
+													const pfc::string8& directoryNameInput)
+{
+	pfc::string8 artistName = artistNameInput;
+	if (artistName.is_empty())
+		artistName = "?";
+
+	pfc::string8 albumName = albumNameInput;
+	if (albumName.is_empty())
+		albumName = "?";
+	
+	pfc::string8 directoryName("./");
+	directoryName.add_string(directoryNameInput);
+	
+	
+
+	
+	SelectionTreeNode* artist = GetArtist(artistName);
+	SelectionTreeNode* album = NULL;
+	SelectionTreeNode* directory = NULL;
+
+	// Fetch/create artist/album/directory nodes
+	if (!artist)
+	{
+		artist = new SelectionTreeNode(artistName, rootNode);
+		rootNode->AppendChild(artist);
+		album = new SelectionTreeNode(albumName, artist);
+		artist->AppendChild(album);
+		directory = new SelectionTreeNode(new SelectionToMatch(), directoryName, album);
+		album->AppendChild(directory);
+	}
+	else
+	{
+		album = artist->GetChild(albumName);
+
+		if (!album)
+		{
+			album = new SelectionTreeNode(albumName, artist);
+			artist->AppendChild(album);
+			directory = new SelectionTreeNode(new SelectionToMatch(), directoryName, album);
+			album->AppendChild(directory);
+		}
+		else
+		{
+			directory = album->GetChild(directoryName);
+
+			if (!directory)
+			{
+				directory = new SelectionTreeNode(new SelectionToMatch(), directoryName, album);
+				album->AppendChild(directory);
+			}
+		}
+	}
+
+	pfc::dynamic_assert(directory->HasSelectionData());
+	return directory->GetSelectionData();
 }
 
 void SelectionTreeModel::SortTreeAlphabetically()

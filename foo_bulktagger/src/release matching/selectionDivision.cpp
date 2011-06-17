@@ -43,7 +43,6 @@ void SelectionDivisorByTags::DivideSelection()
 {
 	treeModel = new SelectionTreeModel();
 
-		
 	file_info_impl trackInfo;
 
 	for (unsigned i = 0; i < selection.get_count(); i++)
@@ -54,15 +53,47 @@ void SelectionDivisorByTags::DivideSelection()
 		{
 			const char* artist = trackInfo.meta_get("Artist",0);
 			const char* album = trackInfo.meta_get("Album",0);
-
-			if (!artist || !album)
+							
+			SelectionToMatch* match = NULL;
+			
+			if (!artist)
+				artist = "";
+			
+			if (album)
 			{
-				console::printf("couldn't get track info");
-				continue;
+				match = treeModel->FetchOrCreate(artist, album);
 			}
+			else
+			{
+				album = "";
+				pfc::string8 trackLocation;
+
 				
-			SelectionToMatch* match = treeModel->FetchOrCreate(artist, album);
+				static_api_ptr_t<library_manager> libraryMgr;
+				// Grab the track's filepath, relative to the base music folder
+				// TODO I'm ignoring the library_manager::get_relative_path() warning
+				if (libraryMgr->get_relative_path(trackPtr, trackLocation))
+				{
+					// Extract the folder (non-filename) part of the filepath
+					pfc::string_directory trackFolder(trackLocation.get_ptr());
+					char trackFolderAsCharArr[256];
+					// yeah i know i shouldn't be using strcpy - TODO
+					::strcpy(trackFolderAsCharArr, trackFolder.operator const char *());
+
+					match = treeModel->FetchOrCreate(artist, album, trackFolderAsCharArr);
+				}
+				else
+				{
+					pfc::dynamic_assert(false);
+					//match = treeModel->FetchOrCreate(artist, "", trackPtr->get_path());
+				}
+			}
+
 			match->AddTrack(trackPtr);
+		}
+		else
+		{
+			pfc::dynamic_assert(false);
 		}
 	}
 

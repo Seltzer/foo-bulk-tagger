@@ -66,9 +66,10 @@ namespace FBT
 		SelectionTreeNode* ArtistAt(unsigned);
 		unsigned ArtistCount() const;
 
-		// TODO provide overload for folder name
-		// TODO doesn't handle blank artist/album tags yet
+		
 		SelectionToMatch* FetchOrCreate(const pfc::string8& artist, const pfc::string8& album);
+		// Overload for when album tag is unavailable
+		SelectionToMatch* FetchOrCreate(const pfc::string8& artist, const pfc::string8& album, const pfc::string8& directory);
 
 		SelectionTreeNode* GetRoot();
 		
@@ -77,7 +78,7 @@ namespace FBT
 
 	private:
 		SelectionTreeNode* GetArtist(const pfc::string8& artistName);
-		
+				
 		SelectionTreeNode* rootNode;
 
 	};

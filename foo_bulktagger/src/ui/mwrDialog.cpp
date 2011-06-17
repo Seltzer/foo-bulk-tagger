@@ -51,7 +51,7 @@ namespace FBT
 		{
 			SelectionTreeNode* artist = model->ArtistAt(i);
 
-			// Create artist node and append it to the root
+			// Create artist node in view and append it to the root
 			STRING8_TO_LPCTSTR(artist->GetStringData(), 256, convertedArtistString);
 
 			CTreeItem artistNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedArtistString, 
@@ -61,13 +61,31 @@ namespace FBT
 			{
 				SelectionTreeNode* album = artist->ChildAt(j);
 
-				// Create album node and append it to the artist node
+				// Create album node in view and append it to the artist node
 				STRING8_TO_LPCTSTR(album->GetStringData(), 256, convertedAlbumString);
-				CTreeItem rootNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedAlbumString, 
+				CTreeItem albumNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedAlbumString, 
 										0, 0, 0, 0, (LPARAM) album, artistNode.operator HTREEITEM(), TVI_LAST);
+								
+				if (album->HasSelectionData())
+				{
+					// While we're here, build the metadata table for the selection - we're gonna need it later
+					album->GetSelectionData()->BuildMetaTable();
+				}
+				else
+				{
+					for(int k = 0; k < album->ChildCount(); k++)
+					{
+						SelectionTreeNode* directory = album->ChildAt(k);
 
-				// While we're here, build the metadata table for the selection - we're gonna need it later
-				album->GetSelectionData()->BuildMetaTable();
+						// Create directory node in view and append it to the album node
+						STRING8_TO_LPCTSTR(directory->GetStringData(), 256, convertedDirectoryString);
+						CTreeItem dirNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedDirectoryString, 
+										0, 0, 0, 0, (LPARAM) directory, albumNode.operator HTREEITEM(), TVI_LAST);
+
+						// While we're here, build the metadata table for the selection - we're gonna need it later
+						directory->GetSelectionData()->BuildMetaTable();
+					}
+				}
 			}
 		}
 	}
@@ -78,7 +96,7 @@ namespace FBT
 		selectionDataGrid.SetExtendedGridStyle(PGS_EX_SINGLECLICKEDIT);
 
 		selectionDataGrid.InsertColumn(0, _T("Tag Name"), LVCFMT_LEFT, 100, 0);
-		selectionDataGrid.InsertColumn(1, _T("Tag Values"), LVCFMT_LEFT, 200, 0);
+		selectionDataGrid.InsertColumn(1, _T("Tag Values"), LVCFMT_LEFT, 180, 0);
 	}
 
 

@@ -13,7 +13,7 @@ MatchWithReleases Stuff:
 	- Refresh when we update tags
 	- Refresh when anything updates tags
 	- Maybe it'd be a better idea to divide track selections according to the user's current Foobar
-		division. If not, still have to add folder location
+		division. 
 * Matching heuristics:
 	- Look into track fingerprinting
 * Property Grid for metadata
@@ -37,6 +37,7 @@ Misc:
 * Database of common searches
 * Improve efficiency (i.e. in SelectionTreeView) by caching results of previous queries
 * Store strings somewhere
+* Fix 256 char buffers
 
 Learning:
 
