@@ -2,12 +2,7 @@
 #define PLUGIN_H_
 
 
-
 #include "common.h"
-
-#include <vector>
-#include "release matching/selectionDivision.h"
-#include <QFont>
 #include <QThread>
 
 class QApplication;
@@ -16,11 +11,13 @@ class QApplication;
 
 namespace FBT
 {
+	class SelectionTreeModel;
 	class MatchWithReleasesDialog;
 
 
 	class Plugin : public QThread
 	{
+		Q_OBJECT
 
 	public:
 
@@ -33,11 +30,7 @@ namespace FBT
 		virtual void run();
 
 		void SpawnMatchWithReleasesDialog(SelectionTreeModel*);
-			
 		
-		//static const QFont& GetDefaultFont();
-		//static QFont* defaultFont;
-
 	private:
 		static Plugin* pluginInstance;
 
@@ -48,9 +41,6 @@ namespace FBT
 		QApplication* app;
 
 		bool initialised;	
-
-		std::vector<MatchWithReleasesDialog*> matchDialogs;
-
 	};
 
 }

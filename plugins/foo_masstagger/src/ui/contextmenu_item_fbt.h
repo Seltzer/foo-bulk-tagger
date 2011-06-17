@@ -8,7 +8,7 @@
 #include "release matching/selectionDivision.h"
 
 
-
+#include <QTreeView>
 
 // {054DAED3-A724-4a76-8102-8D068DBC0158}
 static const GUID guid_FetchTags = 
@@ -114,11 +114,12 @@ public:
 				pfc::dynamic_assert(p_data.get_size());
 
 				// Divide selected tracks into releases
-				FBT::SelectionDivisorByTags divisor(p_data);
-				divisor.DivideSelection();
+				FBT::SelectionDivisorByTags* divisor = new FBT::SelectionDivisorByTags(p_data);
+				divisor->DivideSelection();
 
-				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor.GetTreeModel());
+				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor->GetTreeModel());
 
+	
 				break;
 			}
 			case Config:
