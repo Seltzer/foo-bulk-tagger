@@ -1,12 +1,10 @@
 #include "common.h"
 #include "config.h"
-#include <QApplication>
-#include <qframe.h>
 
 #include "ui/threadedRunners.h"
 #include "plugin.h"
 
-
+#include "ui/mwrDialog.h"
 
 
 
@@ -52,41 +50,45 @@ void Plugin::HideWindow() {
 Plugin::Plugin()
 	: initialised(false)
 {
-	console::printf("hello - initialised resides at %d", &initialised);
+	//console::printf("hello - initialised resides at %d", &initialised);
 
-	console::printf("before start");
-	start();
-	console::printf("before while loop");
+	//console::printf("before start");
+	//start();
+	//console::printf("before while loop");
 	
 	//while(!initialised);
-	console::printf("after while loop");
+	//console::printf("after while loop");
 }
 
 
 Plugin::~Plugin()
 {
 	//appFrame->deleteLater();
-	app->quit();
+	//app->quit();
 }
 
 
 void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 {
+	MWRDialog* dialog = new MWRDialog(IDD_MWRDIALOG,core_api::get_main_window());
 
-	MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
-	runner->start();
+	//new find_release_dialog(IDD_DIALOG_FIND_RELEASE, core_api::get_main_window(), p_data);
+
+	//MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
+	//runner->start();
+	//
 }
 
 void Plugin::run()
 {
 	int argc(0);
-	app = new QApplication(argc,NULL);
+	//app = new QApplication(argc,NULL);
 	
 	initialised = true;
 
-	console::printf("hello - initialised resides at %d", &initialised);
+	//console::printf("hello - initialised resides at %d", &initialised);
 
-	app->exec();
+	//app->exec();
 }
 
 

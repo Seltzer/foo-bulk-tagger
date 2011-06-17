@@ -3,9 +3,7 @@
 
 
 #include "common.h"
-#include <QThread>
 
-class QApplication;
 
 
 
@@ -15,10 +13,8 @@ namespace FBT
 	class MatchWithReleasesDialog;
 
 
-	class Plugin : public QThread
+	class Plugin
 	{
-		Q_OBJECT
-
 	public:
 
 		static Plugin* GetInstance();
@@ -26,7 +22,6 @@ namespace FBT
 		static void ShowWindow();
 		static void HideWindow();
 		
-		// QThread override
 		virtual void run();
 
 		void SpawnMatchWithReleasesDialog(SelectionTreeModel*);
@@ -38,7 +33,6 @@ namespace FBT
 		Plugin();
 		~Plugin();
 
-		QApplication* app;
 
 		bool initialised;	
 	};

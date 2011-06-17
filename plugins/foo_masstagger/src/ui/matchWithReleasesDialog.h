@@ -1,10 +1,6 @@
+/*
 #ifndef _MATCH_WITH_RELEASES_DIALOG_H_
 #define _MATCH_WITH_RELEASES_DIALOG_H_
-
-#include <QFrame>
-
-
-class QTreeView;
 
 
 
@@ -15,7 +11,7 @@ namespace FBT
 	class SelectionTreeModel;
 	
 
-	class MatchWithReleasesDialog : public QFrame
+	class MatchWithReleasesDialog
 	{
 
 	public:
@@ -44,3 +40,4 @@ namespace FBT
 
 
 
+*/

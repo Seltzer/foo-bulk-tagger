@@ -76,6 +76,7 @@ SelectionDivisorByTags::SelectionDivisorByTags(const metadb_handle_list& initSel
 
 void SelectionDivisorByTags::DivideSelection()
 {
+	/*
 	treeModel = new SelectionTreeModel();
 	treeModel->FetchOrCreate("The Smiths", "Meat is Murder");
 	treeModel->FetchOrCreate("The Smiths", "Meat is Murder");
@@ -92,7 +93,7 @@ void SelectionDivisorByTags::DivideSelection()
 
 	//treeModel->AppendArtist(topNode1);
 	//treeModel->AppendArtist(topNode2);
-
+	*/
 }
 
 SelectionTreeModel* SelectionDivisorByTags::GetTreeModel()

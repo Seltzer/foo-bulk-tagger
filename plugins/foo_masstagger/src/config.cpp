@@ -28,7 +28,6 @@ of configuration variables have an implicit default value,
 so their constructor takes only one parameter.
 **************************/
 
-
 // We will provide a window that can be toggled on and off
 // by the user, so here come the settings for this.
 

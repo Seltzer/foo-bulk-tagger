@@ -1,6 +1,7 @@
 #ifndef SELECTION_TREE_H_
 #define SELECTION_TREE_H_
 
+/*
 #include "../common.h"
 #include <QAbstractItemModel>
 #include <QModelIndex>
@@ -16,7 +17,7 @@ namespace FBT
 			- Artist string (never has SelectionToMatch)
 			- Album string  (has SelectionToMatch if non-empty)
 			- Folder string (always has SelectionToMatch)
-	 */
+	 *//*
 	class SelectionTreeNode
 	{
 
@@ -52,11 +53,11 @@ namespace FBT
 		std::string stringData;
 		SelectionToMatch* selectionData;
 	};
-
+	*/
 
 
 	/* Contains SelectionTreeNodes
-	 */
+	 *//*
 	class SelectionTreeModel : public QAbstractItemModel
 	{
 		Q_OBJECT
@@ -99,7 +100,7 @@ namespace FBT
 
 
 
-
+*/
 
 
 

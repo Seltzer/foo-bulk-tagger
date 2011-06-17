@@ -1,7 +1,7 @@
 #include "selectionTreeModel.h"
 #include "selectionDivision.h"
 
-
+/*
 namespace FBT
 {
 
@@ -305,3 +305,4 @@ int SelectionTreeModel::columnCount(const QModelIndex& parent) const
 
 
 }
+*/

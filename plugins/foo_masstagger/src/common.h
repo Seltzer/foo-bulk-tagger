@@ -1,5 +1,6 @@
-#include "../../SDK/foobar2000.h"
-#include "../../helpers/helpers.h"
+#include "foobar2000.h"
+#include "helpers.h"
+#include "../resource.h"
 
 #include <windowsx.h>
 
