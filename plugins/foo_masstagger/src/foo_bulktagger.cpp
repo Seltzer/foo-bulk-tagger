@@ -26,6 +26,16 @@ static initquit_factory_t<initquit_fbt> foo_initquit;
 
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved)
 {
+	/*
+	if (fdwReason == DLL_PROCESS_ATTACH || fdwReason == DLL_THREAD_ATTACH)
+        if (!_CRT_INIT(hinstDLL, fdwReason, lpReserved))
+            return(FALSE);
+
+    if (fdwReason == DLL_PROCESS_DETACH || fdwReason == DLL_THREAD_DETACH)
+        if (!_CRT_INIT(hinstDLL, fdwReason, lpReserved))
+            return(FALSE);
+    return(TRUE);*/
+
 	return TRUE;
 }
 

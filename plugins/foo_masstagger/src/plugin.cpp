@@ -1,6 +1,7 @@
 #include "common.h"
 #include "config.h"
 #include <QApplication>
+#include <qframe.h>
 
 #include "ui/threadedRunners.h"
 #include "plugin.h"
@@ -51,8 +52,14 @@ void Plugin::HideWindow() {
 Plugin::Plugin()
 	: initialised(false)
 {
+	console::printf("hello - initialised resides at %d", &initialised);
+
+	console::printf("before start");
 	start();
-	while(!initialised);
+	console::printf("before while loop");
+	
+	//while(!initialised);
+	console::printf("after while loop");
 }
 
 
@@ -65,6 +72,7 @@ Plugin::~Plugin()
 
 void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 {
+
 	MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
 	runner->start();
 }
@@ -75,6 +83,8 @@ void Plugin::run()
 	app = new QApplication(argc,NULL);
 	
 	initialised = true;
+
+	console::printf("hello - initialised resides at %d", &initialised);
 
 	app->exec();
 }
