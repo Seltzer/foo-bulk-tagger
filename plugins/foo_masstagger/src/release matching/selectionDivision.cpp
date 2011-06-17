@@ -50,148 +50,216 @@ ISelectionDivisor::ISelectionDivisor(const metadb_handle_list& initSelection)
 {
 }
 
-
-vector<SelectionToMatch>& ISelectionDivisor::GetSelectionDivisions()
-{
-	return divisions;
-}
-
-
-
-///////////////// SelectionDivisorByTags implementation
-SelectionDivisorByTags::SelectionDivisorByTags(const metadb_handle_list& initSelection)
-	: ISelectionDivisor(initSelection)
-{
-}
-
-void SelectionDivisorByTags::AddTrackToSelection(metadb_handle_ptr track)
+void ISelectionDivisor::AddTrackToSelection(metadb_handle_ptr track)
 {
 	selection.add_item(track);	
 }
 
-void SelectionDivisorByTags::AddTracksToSelection(const metadb_handle_list& tracks)
+void ISelectionDivisor::AddTracksToSelection(const metadb_handle_list& tracks)
 {
 	selection += tracks;
 	selection.remove_duplicates();
 }
 
+
+///////////////// SelectionDivisorByTags implementation
+SelectionDivisorByTags::SelectionDivisorByTags(const metadb_handle_list& initSelection)
+	: ISelectionDivisor(initSelection), treeModel(NULL)
+{
+}
+
 void SelectionDivisorByTags::DivideSelection()
 {
-	// For now, chuck everything into one SelectionDivision
-	divisions.push_back(SelectionToMatch());
-	divisions[0].AddTracks(selection);
+	SelectionTreeNode* topNode1 = new SelectionTreeNode("tn1");
+	SelectionTreeNode* topNode2 = new SelectionTreeNode("tn2");
+	SelectionTreeNode* aNode = new SelectionTreeNode("aaa", topNode1);
+	topNode1->AppendChild(aNode);
+	SelectionTreeNode* bNode = new SelectionTreeNode("bbb", topNode1);
+	topNode1->AppendChild(bNode);
+	SelectionTreeNode* cNode = new SelectionTreeNode("ccc", topNode2);
+	topNode2->AppendChild(cNode);
+
+	SelectionTreeNode* dNode = new SelectionTreeNode("ddd", aNode);
+	aNode->AppendChild(dNode);
+	SelectionTreeNode* eNode = new SelectionTreeNode("eee", aNode);
+	aNode->AppendChild(eNode);
+	SelectionTreeNode* fNode = new SelectionTreeNode("fff", aNode);
+	aNode->AppendChild(fNode);
+
+	SelectionTreeNode* gNode = new SelectionTreeNode("ggg", dNode);
+	dNode->AppendChild(gNode);
+
+
+
+	treeModel = new SelectionTreeModel();
+	treeModel->AppendToRoot(topNode1);
+	treeModel->AppendToRoot(topNode2);
+
+}
+
+SelectionTreeModel* SelectionDivisorByTags::GetTreeModel()
+{
+	return treeModel;
 }
 
 
 
 
 
-
-TreeItem::TreeItem(std::string data, TreeItem* parent)
+SelectionTreeNode::SelectionTreeNode(std::string data, SelectionTreeNode* parent)
 	: parentItem(parent)
 {
 	itemData.append(QVariant(data.c_str()));
 }
 
-TreeItem::TreeItem(SelectionToMatch* selection, std::string data, TreeItem* parent)
+SelectionTreeNode::SelectionTreeNode(SelectionToMatch* selection, std::string data, SelectionTreeNode* parent)
 	: selectionData(selection), parentItem(parent)
 {
 	itemData.append(QVariant(data.c_str()));
 }
 
 
-/*
-void TreeItem::appendChild(TreeItem* child)
+void SelectionTreeNode::SetParent(SelectionTreeNode* parentItem)
 {
-	childItems.append(child);
+	this->parentItem = parentItem;
 }
 
-TreeItem* TreeItem::child(int row)
+
+void SelectionTreeNode::AppendChild(SelectionTreeNode* item)
+{
+	item->SetParent(this);
+	childItems.append(item);
+}
+
+SelectionTreeNode* SelectionTreeNode::ChildAt(int row)
 {
 	return childItems.value(row);
 }
 
-int TreeItem::childCount() const
+int SelectionTreeNode::ChildCount() const
 {
 	return childItems.count();
 }
 
-QVariant TreeItem::data(int column) const
+int SelectionTreeNode::ColumnCount() const
+{
+	return itemData.count();
+}
+
+QVariant SelectionTreeNode::data(int column) const
 {
 	return itemData.value(column);
 }
 
-
-int TreeItem::row() const
-{
-	if (parentItem)
-		return parentItem->childItems.indexOf(const_cast<TreeItem*>(this));
-
-	return 0;
-}
-
-TreeItem* TreeItem::parent()
+SelectionTreeNode* SelectionTreeNode::GetParent()
 {
 	return parentItem;
 }
 
-int TreeItem::columnCount() const
+int SelectionTreeNode::Row() const
 {
-	return itemData.count();
+	if (parentItem)
+		return parentItem->childItems.indexOf(const_cast<SelectionTreeNode*>(this));
+
+	return 0;
 }
-*/
-
-
- void TreeItem::appendChild(TreeItem *item)
- {
-	 item->SetParent(this);
-     childItems.append(item);
- }
-
- TreeItem *TreeItem::child(int row)
- {
-     return childItems.value(row);
- }
-
- int TreeItem::childCount() const
- {
-     return childItems.count();
- }
-
- int TreeItem::columnCount() const
- {
-     return itemData.count();
- }
-
- QVariant TreeItem::data(int column) const
- {
-     return itemData.value(column);
- }
-
- TreeItem *TreeItem::parent()
- {
-     return parentItem;
- }
-
- int TreeItem::row() const
- {
-     if (parentItem)
-         return parentItem->childItems.indexOf(const_cast<TreeItem*>(this));
-
-     return 0;
- }
 
 
 
 /*
-TreeModel::TreeModel(QObject *parent)
-	: QAbstractItemModel(parent)
+const std::string& SelectionTreeNode::GetStringData(int role) const
 {
-	rootItem = new TreeItem("Root baby yeah!");
+	console::printf("data %s obtained from node @ %d", stringData.c_str(),this);
+	console::printf("\tmy # children = %d", childCount());
+
+	QString myData = QString(stringData.c_str());
+	console::printf("my data as qstring = %s", myData.toLocal8Bit().data());
+	
+
+	if (role == Qt::DisplayRole)
+	{
+		return stringData;
+	}
+	else if (role == Qt::UserRole)
+	{
+		return stringData;
+	}
+	else
+	{
+		return std::string("lll");
+	}
+}
+
+SelectionToMatch* SelectionTreeNode::GetSelectionData() const
+{
+	return selectionData;
+}
+
+void SelectionTreeNode::AppendChild(SelectionTreeNode* item)
+{
+	pfc::dynamic_assert(item);
+
+	item->SetParent(this);
+	childItems.append(item);
 }
 
 
-QVariant TreeModel::data(const QModelIndex &index, int role) const
+bool selectionTreeItemComparator(const SelectionTreeNode* item1, const SelectionTreeNode* item2)
+{
+	return item1->GetStringData() < item2->GetStringData();
+}
+
+
+void SelectionTreeNode::InsertChildInOrder(SelectionTreeNode* item)
+{
+	item->SetParent(this);
+
+	childItems.append(item);
+	qStableSort(childItems.begin(), childItems.end(), selectionTreeItemComparator);
+}
+
+bool SelectionTreeNode::HasChild(const std::string& childData) const
+{
+	foreach(SelectionTreeNode* child, childItems)
+	{
+		if (child->GetStringData() == childData)
+			return true;
+	}
+
+	return false;
+}
+*/
+
+
+
+
+
+
+
+
+ SelectionTreeModel::SelectionTreeModel(QObject* parent)
+     : QAbstractItemModel(parent)
+ {
+     //QList<QVariant> rootData;
+     //rootData << "Title" << "Summary";
+     rootItem = new SelectionTreeNode("hai");
+     //setupModelData(data.split(QString("\n")), rootItem);
+ }
+
+SelectionTreeModel::~SelectionTreeModel()
+{
+	delete rootItem;
+}
+
+int SelectionTreeModel::columnCount(const QModelIndex& parent) const
+{
+	if (parent.isValid())
+		return static_cast<SelectionTreeNode*>(parent.internalPointer())->ColumnCount();
+	else
+		return rootItem->ColumnCount();
+}
+
+QVariant SelectionTreeModel::data(const QModelIndex& index, int role) const
 {
 	if (!index.isValid())
 		return QVariant();
@@ -199,12 +267,12 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
 	if (role != Qt::DisplayRole)
 		return QVariant();
 
-	TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+	SelectionTreeNode* item = static_cast<SelectionTreeNode*>(index.internalPointer());
 
 	return item->data(index.column());
 }
-	
-Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
+
+Qt::ItemFlags SelectionTreeModel::flags(const QModelIndex& index) const
 {
 	if (!index.isValid())
 		return 0;
@@ -212,7 +280,7 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 	return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant SelectionTreeModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 	if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 		return rootItem->data(section);
@@ -220,180 +288,57 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int rol
 	return QVariant();
 }
 
-
-QModelIndex TreeModel::index(int row, int column, const QModelIndex& parent) const
+QModelIndex SelectionTreeModel::index(int row, int column, const QModelIndex& parent) const
 {
 	if (!hasIndex(row, column, parent))
 		return QModelIndex();
 
-	TreeItem *parentItem;
+	SelectionTreeNode* parentItem;
 
 	if (!parent.isValid())
 		parentItem = rootItem;
 	else
-		parentItem = static_cast<TreeItem*>(parent.internalPointer());
+		parentItem = static_cast<SelectionTreeNode*>(parent.internalPointer());
 
-	TreeItem *childItem = parentItem->child(row);
-	
+	SelectionTreeNode* childItem = parentItem->ChildAt(row);
 	if (childItem)
 		return createIndex(row, column, childItem);
 	else
 		return QModelIndex();
 }
 
-
-
-QModelIndex TreeModel::parent(const QModelIndex &index) const
+QModelIndex SelectionTreeModel::parent(const QModelIndex& index) const
 {
 	if (!index.isValid())
 		return QModelIndex();
 
-	TreeItem *childItem = static_cast<TreeItem*>(index.internalPointer());
-	TreeItem *parentItem = childItem->parent();
+	SelectionTreeNode* childItem = static_cast<SelectionTreeNode*>(index.internalPointer());
+	SelectionTreeNode* parentItem = childItem->GetParent();
 
 	if (parentItem == rootItem)
 		return QModelIndex();
 
-	return createIndex(parentItem->row(), 0, parentItem);
+	return createIndex(parentItem->Row(), 0, parentItem);
 }
 
-int TreeModel::rowCount(const QModelIndex &parent) const
+int SelectionTreeModel::rowCount(const QModelIndex& parent) const
 {
-	TreeItem *parentItem;
+	SelectionTreeNode* parentItem;
 	if (parent.column() > 0)
 		return 0;
 
 	if (!parent.isValid())
 		parentItem = rootItem;
 	else
-		parentItem = static_cast<TreeItem*>(parent.internalPointer());
+		parentItem = static_cast<SelectionTreeNode*>(parent.internalPointer());
 
-	return parentItem->childCount();
+	return parentItem->ChildCount();
 }
 
 
-
-void TreeModel::AddToRoot(TreeItem* item)
+void SelectionTreeModel::AppendToRoot(SelectionTreeNode* item)
 {
-	rootItem->appendChild(item);
-}
-	
-
-int TreeModel::columnCount(const QModelIndex& parent) const
-{
-	if (parent.isValid())
-		return static_cast<TreeItem*>(parent.internalPointer())->columnCount();
-	else
-		return rootItem->columnCount();
-}
-*/
-
-
-
- TreeModel::TreeModel(QObject *parent)
-     : QAbstractItemModel(parent)
- {
-     //QList<QVariant> rootData;
-     //rootData << "Title" << "Summary";
-     rootItem = new TreeItem("hai");
-     //setupModelData(data.split(QString("\n")), rootItem);
- }
-
- TreeModel::~TreeModel()
- {
-     delete rootItem;
- }
-
- int TreeModel::columnCount(const QModelIndex &parent) const
- {
-     if (parent.isValid())
-         return static_cast<TreeItem*>(parent.internalPointer())->columnCount();
-     else
-         return rootItem->columnCount();
- }
-
- QVariant TreeModel::data(const QModelIndex &index, int role) const
- {
-     if (!index.isValid())
-         return QVariant();
-
-     if (role != Qt::DisplayRole)
-         return QVariant();
-
-     TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-
-     return item->data(index.column());
- }
-
- Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
- {
-     if (!index.isValid())
-         return 0;
-
-     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
- }
-
- QVariant TreeModel::headerData(int section, Qt::Orientation orientation,
-                                int role) const
- {
-     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
-         return rootItem->data(section);
-
-     return QVariant();
- }
-
- QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent)
-             const
- {
-     if (!hasIndex(row, column, parent))
-         return QModelIndex();
-
-     TreeItem *parentItem;
-
-     if (!parent.isValid())
-         parentItem = rootItem;
-     else
-         parentItem = static_cast<TreeItem*>(parent.internalPointer());
-
-     TreeItem *childItem = parentItem->child(row);
-     if (childItem)
-         return createIndex(row, column, childItem);
-     else
-         return QModelIndex();
- }
-
- QModelIndex TreeModel::parent(const QModelIndex &index) const
- {
-     if (!index.isValid())
-         return QModelIndex();
-
-     TreeItem *childItem = static_cast<TreeItem*>(index.internalPointer());
-     TreeItem *parentItem = childItem->parent();
-
-     if (parentItem == rootItem)
-         return QModelIndex();
-
-     return createIndex(parentItem->row(), 0, parentItem);
- }
-
- int TreeModel::rowCount(const QModelIndex &parent) const
- {
-     TreeItem *parentItem;
-     if (parent.column() > 0)
-         return 0;
-
-     if (!parent.isValid())
-         parentItem = rootItem;
-     else
-         parentItem = static_cast<TreeItem*>(parent.internalPointer());
-
-     return parentItem->childCount();
- }
-
-
- void TreeModel::AddToRoot(TreeItem* item)
-{
-	rootItem->appendChild(item);
+	rootItem->AppendChild(item);
 }
 	
 

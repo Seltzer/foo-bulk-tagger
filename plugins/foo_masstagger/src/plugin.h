@@ -32,8 +32,7 @@ namespace FBT
 		// QThread override
 		virtual void run();
 
-		void SpawnMatchWithReleasesDialog();
-		void SpawnMatchWithReleasesDialog(TreeModel*);
+		void SpawnMatchWithReleasesDialog(SelectionTreeModel*);
 			
 		
 		//static const QFont& GetDefaultFont();

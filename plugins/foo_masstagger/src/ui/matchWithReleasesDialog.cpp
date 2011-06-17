@@ -10,19 +10,7 @@ namespace FBT
 
 
 
-MatchWithReleasesDialog::MatchWithReleasesDialog()
-{
-	setWindowTitle("Match Dialog");
-
-	// TODO wasteful
-	//this->palette().setColor(QPalette::Background, QColor(0, 0, 0));
-	//setPalette(palette);
-	setAutoFillBackground(true);
-
-	setFixedSize(400,300);
-}
-
-MatchWithReleasesDialog::MatchWithReleasesDialog(TreeModel* model)
+MatchWithReleasesDialog::MatchWithReleasesDialog(SelectionTreeModel* model)
 	: model(model)
 {
 	setWindowTitle("Match Dialog");
@@ -36,15 +24,9 @@ MatchWithReleasesDialog::MatchWithReleasesDialog(TreeModel* model)
 
 	
 	view = new QTreeView(this);
-
-	QAbstractItemModel* modelCast = (QAbstractItemModel*) model;
-	console::printf("successful cast");
-	view->setModel(modelCast);
-		
+	view->setModel((QAbstractItemModel*) model);
 	view->move(10,10);
 	view->resize(200,200);
-	
-
 }
 
 

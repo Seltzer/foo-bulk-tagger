@@ -117,34 +117,7 @@ public:
 				FBT::SelectionDivisorByTags divisor(p_data);
 				divisor.DivideSelection();
 
-				divisor.GetSelectionDivisions();
-
-				FBT::TreeItem* topNode1 = new FBT::TreeItem("tn1");
-				FBT::TreeItem* topNode2 = new FBT::TreeItem("tn2");
-				FBT::TreeItem* aNode = new FBT::TreeItem("aaa", topNode1);
-				topNode1->appendChild(aNode);
-				FBT::TreeItem* bNode = new FBT::TreeItem("bbb", topNode1);
-				topNode1->appendChild(bNode);
-				FBT::TreeItem* cNode = new FBT::TreeItem("ccc", topNode2);
-				topNode2->appendChild(cNode);
-
-				FBT::TreeItem* dNode = new FBT::TreeItem("ddd", aNode);
-				aNode->appendChild(dNode);
-				FBT::TreeItem* eNode = new FBT::TreeItem("eee", aNode);
-				aNode->appendChild(eNode);
-				FBT::TreeItem* fNode = new FBT::TreeItem("fff", aNode);
-				aNode->appendChild(fNode);
-
-				FBT::TreeItem* gNode = new FBT::TreeItem("ggg", dNode);
-				dNode->appendChild(gNode);
-
-
-
-				FBT::TreeModel* model = new FBT::TreeModel();
-				model->AddToRoot(topNode1);
-				model->AddToRoot(topNode2);
-
-				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(model);
+				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor.GetTreeModel());
 
 				break;
 			}

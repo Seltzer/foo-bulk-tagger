@@ -79,15 +79,7 @@ Plugin::~Plugin()
 }
 
 
-void Plugin::SpawnMatchWithReleasesDialog()
-{
-	MatchWithReleasesDialog* newDialog = new MatchWithReleasesDialog;
-	matchDialogs.push_back(newDialog);
-	newDialog->show();
-}
-
-
-void Plugin::SpawnMatchWithReleasesDialog(TreeModel* model)
+void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 {
 	MatchWithReleasesDialog* newDialog = new MatchWithReleasesDialog(model);
 	matchDialogs.push_back(newDialog);

@@ -9,21 +9,20 @@ class QTreeView;
 
 namespace FBT
 {
-	class TreeModel;
+	class SelectionTreeModel;
 
 
 	class MatchWithReleasesDialog : public QFrame
 	{
 
 	public:
-		MatchWithReleasesDialog();
-		MatchWithReleasesDialog(TreeModel*);
+		MatchWithReleasesDialog(SelectionTreeModel*);
 
 	private:
 		metadb_handle_list selectedTracks;
 		//vector<MusicBrainzRelease> candidateMatches;
 
-		TreeModel* model;
+		SelectionTreeModel* model;
 		QTreeView* view;
 	};
 

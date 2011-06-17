@@ -12,6 +12,7 @@
 namespace FBT
 {
 	class MatchingHeuristic;
+	class SelectionTreeModel;
 
 
 
@@ -47,19 +48,14 @@ namespace FBT
 		ISelectionDivisor() {}
 		ISelectionDivisor(const metadb_handle_list&);
 
-		virtual void AddTrackToSelection(metadb_handle_ptr) = 0;
-		virtual void AddTracksToSelection(const metadb_handle_list&) = 0;
+		virtual void AddTrackToSelection(metadb_handle_ptr);
+		virtual void AddTracksToSelection(const metadb_handle_list&);
 
-		// Could use strategy pattern?
 		virtual void DivideSelection() = 0;
-
-		std::vector<SelectionToMatch>& GetSelectionDivisions();
 
 	protected:
 		metadb_handle_list selection;
-		std::vector<SelectionToMatch> divisions;
 	};
-
 
 
 
@@ -68,6 +64,8 @@ namespace FBT
 			2.) ? - Album Name (when only Album Name tag is present)
 			3.) Artist - Folder Name (when only Artist tag is present)
 			4.) Folder Name (when neither Artist, nor Album Name tags are present)
+
+	   And generates a tree
 	 */
 	class SelectionDivisorByTags : public ISelectionDivisor
 	{
@@ -76,74 +74,79 @@ namespace FBT
 		SelectionDivisorByTags() {}
 		SelectionDivisorByTags(const metadb_handle_list&);
 
-		virtual void AddTrackToSelection(metadb_handle_ptr);
-		virtual void AddTracksToSelection(const metadb_handle_list&);
-
 		virtual void DivideSelection();
+		SelectionTreeModel* GetTreeModel();
+
+	private:
+		SelectionTreeModel* treeModel;
 	};
 
 
-	/* Can be:
+	
+	/* A SelectionTreeNode can be:
 			- Artist string (never has SelectionToMatch)
 			- Album string  (has SelectionToMatch if non-empty)
 			- Folder string (always has SelectionToMatch)
 	 */
-	class TreeItem
+	class SelectionTreeNode
 	{
 
 	public:
-		// Doesn't have SelectionToMatch
-		TreeItem(std::string data, TreeItem* parent = NULL);
+		// Owns a SelectionToMatch
+		SelectionTreeNode(std::string data, SelectionTreeNode* parent = NULL);
+		// Doesn't own a SelectionToMatch
+		SelectionTreeNode(SelectionToMatch*, std::string data, SelectionTreeNode* parent = NULL);
 
-		// Has SelectionToMatch
-		TreeItem(SelectionToMatch*, std::string data, TreeItem* parent = NULL);
+		void AppendChild(SelectionTreeNode*);
 
-		void appendChild(TreeItem *child);
-
-		TreeItem *child(int row);
-		int childCount() const;
+		SelectionTreeNode* ChildAt(int row);
+		int ChildCount() const;
 		QVariant data(int column) const;
-		int row() const;
-		TreeItem *parent();
+		int Row() const;
+		int SelectionTreeNode::ColumnCount() const;
 
-		int TreeItem::columnCount() const;
+		SelectionTreeNode* GetParent();
+		void SetParent(SelectionTreeNode*);
 
 
-		void SetParent(TreeItem* parentItem)
-		{
-			this->parentItem = parentItem;
-		}
-
+		// Convenience methods
+		//void AppendChild(SelectionTreeNode*);
+		// Insert child and maintain alphabetical order - TODO improve efficiency, this sorts list every time
+		//void InsertChildInOrder(SelectionTreeNode*);
+		// TODO improve efficiency by caching
+		//bool HasChild(const std::string& childData) const;
+		//const std::string& GetStringData(int role = Qt::UserRole) const;
+		//SelectionToMatch* GetSelectionData() const;
 
 	private:
-		TreeItem* parentItem;
-		QList<TreeItem*> childItems;
+		SelectionTreeNode* parentItem;
+		QList<SelectionTreeNode*> childItems;
 		
 		QList<QVariant> itemData;
 		SelectionToMatch* selectionData;
 	};
 
 
-	class TreeModel : public QAbstractItemModel
+	class SelectionTreeModel : public QAbstractItemModel
 	{
 		Q_OBJECT
 
 	public:
-		TreeModel(QObject *parent = NULL);
-		~TreeModel();
+		SelectionTreeModel(QObject *parent = NULL);
+		~SelectionTreeModel();
 
-		QVariant data(const QModelIndex &index, int role) const;
-		Qt::ItemFlags flags(const QModelIndex &index) const;
+		QVariant data(const QModelIndex& index, int role) const;
+		Qt::ItemFlags flags(const QModelIndex& index) const;
 		QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-		QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-		QModelIndex parent(const QModelIndex &index) const;
-		int rowCount(const QModelIndex &parent = QModelIndex()) const;
-		int columnCount(const QModelIndex &parent = QModelIndex()) const;
+		QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
+		QModelIndex parent(const QModelIndex& index) const;
+		int rowCount(const QModelIndex& parent = QModelIndex()) const;
+		int columnCount(const QModelIndex& parent = QModelIndex()) const;
 
-		void AddToRoot(TreeItem*);
+		void AppendToRoot(SelectionTreeNode*);
 
 	private:
-		TreeItem *rootItem;
+		SelectionTreeNode* rootItem;
 	};
 
 
