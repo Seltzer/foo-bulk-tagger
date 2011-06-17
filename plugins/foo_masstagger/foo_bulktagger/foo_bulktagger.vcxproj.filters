@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{5f4add1a-f8f1-476d-96d3-c19a6768f2c4}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{d49dbd13-e3b1-487f-a310-10ae4cc15fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\release matching">
+      <UniqueIdentifier>{eae84acf-079f-48f9-bee3-1b0f25960212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui">
+      <UniqueIdentifier>{5906a432-1a47-453e-ad22-9df5a2a7402b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{39e2f12e-2b98-4de7-a9da-0c3ba0b28404}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\release matching\matchingHeuristics.cpp">
+      <Filter>src\release matching</Filter>
+    </ClCompile>
+    <ClCompile Include="src\release matching\selectionDivision.cpp">
+      <Filter>src\release matching</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\mwrDialog.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\foo_bulktagger.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\release matching\matchingHeuristics.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\release matching\potentialMatch.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\release matching\selectionDivision.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\contextmenu_item_fbt.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\mwrDialog.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="res\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\foo_bulktagger.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\docs\building musicbrainz.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\docs\learning.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\docs\plan.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\docs\migration.txt">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\foo_bulktagger.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\shared\shared.lib" />
+  </ItemGroup>
+</Project>

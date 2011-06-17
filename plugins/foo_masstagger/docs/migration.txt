@@ -1,0 +1,29 @@
+
+/I"C:\Foobar\plugins\foo_masstagger\\depends\libmusicbrainz-3.0.2\include" /I"C:\Foobar\plugins\foo_masstagger\\..\helpers" 
+/I"C:\Foobar\plugins\foo_masstagger\\..\SDK" /I"C:\Program Files\WTL81\Include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /Gm- /EHsc /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release\foo_bulktaggera.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /analyze- /errorReport:queue 
+
+/I"C:\Foobar\plugins\foo_masstagger\\depends\libmusicbrainz-3.0.2\include" /I"C:\Foobar\plugins\foo_masstagger\\..\helpers" 
+/I"C:\Foobar\plugins\foo_masstagger\\..\SDK" /I"C:\Foobar\plugins\foo_masstagger\\depends\WTL\Include" /nologo /W3 /WX- /O2 /Oy- /GL /D "WIN32" /D "_WINDOWS" /D "STRICT" /D "NDEBUG" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /Gm- /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fp"Release\foo_bulktagger.pch" /Fa"Release\" /Fo"Release\" /Fd"Release\vc100.pdb" /Gd /analyze- /errorReport:queue 
+
+
+diff:
+/Zi debug info stuff
+{} vs /D "WIN32" /D "_WINDOWS" /D "STRICT" /D "NDEBUG"
+
+old: _WINDLL;%(PreprocessorDefinitions)
+new: WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)
+
+
+temp
+WIN32
+_WINDOWS
+STRICT
+NDEBUG
+
+
+
+
+TODO:
+Reintroduce some of the temporarily removed #defines above
+Build debug symbols in release mode
+Unwind semantics warning
