@@ -15,23 +15,43 @@ Additional features:
 * Bitrate checker
 * Genre finder
 * Incomplete albums
+* Check how fresh data is
 * Compilation finder - filestube.com
 
 
 
-Dependencies arranged into a process
 
-1 - look on musicbrainz
-2 - blank out tags, apply musicbrainz tags
-3 - WARNING - bitrate checker, incomplete albums, dodgy conformance to style (i.e. punctuation)
-4 - copy/swap tags feature
+****************** HEURISTICS / OVERALL PROCESS **********************
 
-5 - genre finder
-6 - file garbage removal
-7 - album art finder
-8 - tags -> filenames 
+5 passes (possibly on different screens)
 
-1 - compilation finder
+
+Pass 1 - Preprocessing:
+	- Bitrate checking
+	
+Pass 2 - All metadata minus genre/style:
+
+	Main heuristic:
+		- Search for MB ids and use those
+		- My heuristic using artist/album data, number of tracks, track lengths, filenames etc.
+		- Fingerprinting
+
+	Give warnings about:
+		- Incomplete albums
+		- Garbage data
+
+Pass 3 - Genre/style from foo_discogs:
+
+Pass 4 - Album art finder:
+
+Pass 5 - Postprocessing:
+	- Copy/swap tags
+	- Tags -> Filenames
+	- Embedding album art etc.
+	- Conformance to style
+	
+
+
 
 
 Questions:

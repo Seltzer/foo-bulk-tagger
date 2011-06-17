@@ -31,6 +31,8 @@ namespace FBT
 		
 		void FindMatches(MatchingHeuristic&);
 		
+		void DoPuidStuff();
+
 	private:
 		metadb_handle_list tracks;
 		pfc::list_t<const file_info*> trackInfo;	// currently unused

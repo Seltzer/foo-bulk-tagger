@@ -24,6 +24,7 @@ namespace FBT
 	        COMMAND_ID_HANDLER(IDOK, OnOKCancel)
 	        COMMAND_ID_HANDLER(IDCANCEL, OnOKCancel)
 			COMMAND_ID_HANDLER(IDC_APPLYTAGS, OnApplyTags);
+			COMMAND_ID_HANDLER(IDC_FETCHTAGS, FetchTags)	
 			NOTIFY_HANDLER(IDC_SELECTIONTREE, TVN_SELCHANGED, OnTreeSelectionChanged)
 	      
 			NOTIFY_CODE_HANDLER(PIN_SELCHANGED, OnSelChanged);
@@ -48,6 +49,7 @@ namespace FBT
 		BOOL OnInitDialog(CWindow, LPARAM);
 		LRESULT OnOKCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 		LRESULT OnApplyTags(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+		LRESULT FetchTags(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 		LRESULT OnTreeSelectionChanged(int, LPNMHDR, BOOL&);
 
 		LRESULT OnAddItem(int idCtrl, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/);

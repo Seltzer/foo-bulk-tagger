@@ -106,6 +106,19 @@ namespace FBT
 		return 0;
 	}
 
+	LRESULT MatchWithReleasesDialog::FetchTags(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+	{
+		pfc::dynamic_assert(currentSelection != NULL);
+
+		currentSelection->DoPuidStuff();
+
+		//currentSelection->WriteTags(addedModifiedTags, this->operator HWND());
+
+
+
+
+		return 0;
+	}
 
 
 	LRESULT MatchWithReleasesDialog::OnTreeSelectionChanged(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)

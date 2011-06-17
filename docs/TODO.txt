@@ -14,6 +14,13 @@ MatchWithReleases Stuff:
 	- Refresh when anything updates tags
 	- Maybe it'd be a better idea to divide track selections according to the user's current Foobar
 		division. 
+
+* Fingerprinting
+	- Use Foobar SDK instead of LAME
+	- In the meantime, figure out why LAME is choking on the Jesus Lizard
+	- Clean up big time - get rid of example and makefiles, use static linking instead of dynamic
+	- Figure out how to use PUIDs within MusicBrainZ API
+
 * Matching heuristics:
 	- Look into track fingerprinting
 * Property Grid for metadata
