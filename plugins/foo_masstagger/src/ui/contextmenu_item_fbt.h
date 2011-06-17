@@ -96,6 +96,8 @@ public:
 
 	void context_command(unsigned p_index,const pfc::list_base_const_t<metadb_handle_ptr>& p_data,const GUID& p_caller)
 	{
+		WHERES_WALLY
+
 		unsigned displayflags;
 		pfc::string8 out;
 		context_get_display(p_index, p_data, out, displayflags, p_caller);
@@ -103,12 +105,13 @@ public:
 		if(displayflags & FLAG_GRAYED) 
 			return;
 		
-
+		console::printf("switching on p_index");
 
 		switch (p_index) 
 		{
 			case FetchTags:
 			{
+				console::printf("here we go");
 				// Should be unnecessary
 				pfc::dynamic_assert(p_data.get_size());
 
@@ -116,8 +119,9 @@ public:
 				FBT::SelectionDivisorByTags* divisor = new FBT::SelectionDivisorByTags(p_data);
 				divisor->DivideSelection();
 
-				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor->GetTreeModel());
-
+				console::printf("spawning dialog");
+				//FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog(divisor->GetTreeModel());
+				FBT::Plugin::GetInstance()->SpawnMatchWithReleasesDialog();
 				
 
 	
@@ -273,6 +277,7 @@ static contextmenu_item_factory_t<contextmenu_fbt> contextmenu_fbt_factory;
 				
 
 */
+
 
 
 

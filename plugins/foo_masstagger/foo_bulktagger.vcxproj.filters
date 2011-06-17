@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\release matching\selectionDivision.cpp">
+      <Filter>src\release matching</Filter>
+    </ClCompile>
+    <ClCompile Include="src\release matching\matchingHeuristics.cpp">
+      <Filter>src\release matching</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\foo_bulktagger.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\mwrDialog.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\release matching\selectionDivision.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\release matching\potentialMatch.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\release matching\matchingHeuristics.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\mwrDialog.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\contextmenu_item_fbt.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\building musicbrainz.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\learning.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="docs\plan.txt">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\shared\shared.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="docs">
+      <UniqueIdentifier>{2fc56f8e-75be-4270-8aae-921b21dddb35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{7916da3d-a856-4262-b923-4a698a64be02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\release matching">
+      <UniqueIdentifier>{03e28a15-40ae-41f5-af49-f03af4a5d455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui">
+      <UniqueIdentifier>{4232cfad-30bd-476e-8210-13187520c1da}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="foo_bulktagger.rc">
+      <Filter>src\ui</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

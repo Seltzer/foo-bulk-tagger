@@ -14,7 +14,11 @@ namespace FBT
 
 
 
+
+
 Plugin* Plugin::pluginInstance (NULL);
+
+CAppModule _Module;
 
 
 Plugin* Plugin::GetInstance()
@@ -68,12 +72,83 @@ Plugin::~Plugin()
 }
 
 
+void Plugin::SpawnMatchWithReleasesDialog()
+{
+	MSG msg;
+	
+	//MWRDialog* dialog = new MWRDialog(core_api::get_main_window());
+
+	/*
+	CMyWindow window;
+
+	
+
+    // Create our main window
+    //if ( NULL == dialog->Create ( core_api::get_main_window(), CWindow::rcDefault, _T("My First ATL Window") ))
+	
+
+
+
+	window.Create(core_api::get_main_window(), CWindow::rcDefault, NULL);
+
+	window.ShowWindow(SW_SHOW);
+	window.EnableWindow();
+	window.UpdateWindow();*/
+	
+
+
+	MWRDialog* dialog = new MWRDialog();
+	
+	if ( NULL == dialog->Create ( NULL, CWindow::rcDefault, NULL))
+		console::printf("fuck you");
+
+    dialog->ShowWindow(SW_SHOW);
+	dialog->SetFocus();
+	dialog->EnableWindow();
+	dialog->UpdateWindow();
+	
+	//wndMain.operator HWND
+
+    // Your standard Win32 message loop:
+    while ( GetMessage ( &msg, NULL, 0, 0 ) > 0 )
+        {
+        TranslateMessage ( &msg );
+        DispatchMessage ( &msg );
+        }
+
+	
+	/* CMessageLoop theLoop;
+    _Module.AddMessageLoop(&theLoop);
+
+	MWRDialog* dialog = new MWRDialog(core_api::get_main_window());
+	dialog->create(core_api::get_main_window());
+    //wndMain.ShowWindow(nCmdShow);
+
+	int nRet = theLoop.Run();
+
+    _Module.RemoveMessageLoop();*/
+ 
+//_Module.Term();
+	//return msg.wParam;
+
+	/*
+	if (dialog->create(IDD_MWRDIALOG, core_api::get_main_window()))
+	{
+		console::printf("success");
+	}
+	else
+	{
+		console::printf("massive fail");
+	}*/
+
+
+
+	//MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
+	//runner->start();
+}
+
 void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 {
-	MWRDialog* dialog = new MWRDialog(IDD_MWRDIALOG,core_api::get_main_window());
-
-	//new find_release_dialog(IDD_DIALOG_FIND_RELEASE, core_api::get_main_window(), p_data);
-
 	//MatchWithReleasesDialogRunner* runner = new MatchWithReleasesDialogRunner(model);
 	//runner->start();
 	//

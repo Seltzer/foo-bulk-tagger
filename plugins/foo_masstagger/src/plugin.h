@@ -4,7 +4,13 @@
 
 #include "common.h"
 
-
+#include <atlbase.h>
+#include <atlapp.h>
+//extern CAppModule _Module;
+#include <atlwin.h>
+#include <atlframe.h>
+#include <atlcrack.h>
+#include <atlmisc.h>
 
 
 namespace FBT
@@ -12,6 +18,7 @@ namespace FBT
 	class SelectionTreeModel;
 	class MatchWithReleasesDialog;
 
+	extern CAppModule _Module;
 
 	class Plugin
 	{
@@ -24,6 +31,7 @@ namespace FBT
 		
 		virtual void run();
 
+		void SpawnMatchWithReleasesDialog();
 		void SpawnMatchWithReleasesDialog(SelectionTreeModel*);
 		
 	private:
