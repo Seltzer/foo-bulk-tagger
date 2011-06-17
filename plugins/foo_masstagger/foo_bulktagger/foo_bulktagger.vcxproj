@@ -41,8 +41,8 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>Release</IntDir>
-    <OutDir>Release</OutDir>
+    <IntDir>Release\</IntDir>
+    <OutDir>Release\</OutDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -84,18 +84,17 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>
-      </ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\depends\helpers;$(SolutionDir)\..\SDK;$(SolutionDir)\depends\WTL\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\depends\WTL\Include;$(SolutionDir)\depends\SDK;$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\depends;$(SolutionDir)\depends\helpers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\SDK\Release;$(SolutionDir)\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shlwapi.lib;$(SolutionDir)\depends\o_libmusicbrainz\src\Release\musicbrainz3.lib;$(SolutionDir)\depends\neon-0.29.3\libneon.lib;$(SolutionDir)\depends\o_libdiscid\Release\discid.lib;pfc.lib;foobar2000_ATL_helpers.lib;$(SolutionDir)\..\foobar2000_component_client\Release\foobar2000_component_client.lib;foobar2000_SDK.lib;foobar2000_sdk_helpers.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Release;$(SolutionDir)\depends\shared;$(SolutionDir)\depends\o_libmusicbrainz\src\Release;$(SolutionDir)\depends\neon-0.29.3;$(SolutionDir)\depends\o_libdiscid\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shlwapi.lib;shared.lib;foobar2000_SDK.lib;foobar2000_sdk_helpers.lib;foobar2000_ATL_helpers.lib;foobar2000_component_client.lib;pfc.lib;musicbrainz3.lib;libneon.lib;discid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -144,16 +143,12 @@
     <None Include="..\docs\learning.txt" />
     <None Include="..\docs\migration.txt" />
     <None Include="..\docs\plan.txt" />
-    <None Include="C:\Foobar\plugins\foo_masstagger\foo_bulktagger\res\icon1.ico" />
     <None Include="res\foo_bulktagger.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="res\foo_bulktagger.rc">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir);$(SolutionDir)\depends\WTL\Include;$(ProjectDir)\res;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\..\shared\shared.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

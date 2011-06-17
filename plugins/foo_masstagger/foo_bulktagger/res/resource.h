@@ -6,7 +6,6 @@
 #define IDR_MAINFRAME                   128
 #define IDD_MAINDLG                     129
 #define IDD_MWRDIALOG                   201
-#define IDI_ICON1                       202
 #define IDC_SELECTIONTREE               1000
 #define IDC_LIST1                       1001
 

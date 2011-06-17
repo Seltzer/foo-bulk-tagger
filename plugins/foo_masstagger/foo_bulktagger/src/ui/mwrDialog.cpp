@@ -49,7 +49,7 @@ namespace FBT
 			// Create artist node
 			CTreeItem artistNode = rootNode.AddTail(convertedArtistString,0);
 						
-			for(unsigned j = 0; j < artist->ChildCount(); j++)
+			for(int j = 0; j < artist->ChildCount(); j++)
 			{
 				SelectionTreeNode* album = artist->ChildAt(j);
 

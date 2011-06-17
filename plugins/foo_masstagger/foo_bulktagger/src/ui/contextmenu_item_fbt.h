@@ -2,7 +2,6 @@
 #define _CONTEXTMENU_ITEM_FBT_H_
 
 #include <iostream>
-#include "../../../SDK/foobar2000.h"
 #include "common.h"
 #include "../plugin.h"
 #include "release matching/selectionDivision.h"
@@ -113,7 +112,7 @@ public:
 			{
 				console::printf("here we go");
 				// Should be unnecessary
-				pfc::dynamic_assert(p_data.get_size());
+				pfc::dynamic_assert(p_data.get_size() > 0);
 
 				// Divide selected tracks into releases
 				FBT::SelectionDivisorByTags* divisor = new FBT::SelectionDivisorByTags(p_data);

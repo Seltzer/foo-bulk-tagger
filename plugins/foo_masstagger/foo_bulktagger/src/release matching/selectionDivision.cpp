@@ -81,7 +81,7 @@ void SelectionDivisorByTags::DivideSelection()
 		
 	file_info_impl trackInfo;
 
-	for (int i = 0; i < selection.get_count(); i++)
+	for (unsigned i = 0; i < selection.get_count(); i++)
 	{
 		metadb_handle_ptr trackPtr = selection.get_item(i);
 
