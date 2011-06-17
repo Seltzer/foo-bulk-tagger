@@ -591,10 +591,11 @@ public:
 	preferences_page_instance_impl(HWND parent, preferences_page_callback::ptr callback) : TDialog(callback) {WIN32_OP(this->Create(parent) != NULL);}
 	HWND get_wnd() {return this->m_hWnd;}
 };
+static bool window_service_trait_defer_destruction(const preferences_page_instance *) {return false;}
 template<typename TDialog> class preferences_page_impl : public preferences_page_v3 {
 public:
 	preferences_page_instance::ptr instantiate(HWND parent, preferences_page_callback::ptr callback) {
-		return new service_impl_t<preferences_page_instance_impl<TDialog> >(parent, callback);
+		return new window_service_impl_t<preferences_page_instance_impl<TDialog> >(parent, callback);
 	}
 };
 

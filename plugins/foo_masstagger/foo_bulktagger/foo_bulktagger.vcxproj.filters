@@ -89,7 +89,7 @@
     <None Include="..\docs\migration.txt">
       <Filter>docs</Filter>
     </None>
-    <None Include="res\icon1.ico">
+    <None Include="C:\Foobar\plugins\foo_masstagger\foo_bulktagger\res\icon1.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -89,7 +89,7 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\..\helpers;$(SolutionDir)\..\SDK;$(SolutionDir)\depends\WTL\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\depends\helpers;$(SolutionDir)\..\SDK;$(SolutionDir)\depends\WTL\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,7 +115,7 @@
       </DllDataFileName>
     </Midl>
     <PostBuildEvent>
-      <Command>copy /Y "$(SolutionDir)\foo_bulktagger\Release\foo_bulktagger.dll" "C:\Program Files (x86)\foobar2000\components"</Command>
+      <Command>copy /Y "$(SolutionDir)\foo_bulktagger\Release\foo_bulktagger.dll" "C:\Program Files\foobar2000\components"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -144,8 +144,8 @@
     <None Include="..\docs\learning.txt" />
     <None Include="..\docs\migration.txt" />
     <None Include="..\docs\plan.txt" />
+    <None Include="C:\Foobar\plugins\foo_masstagger\foo_bulktagger\res\icon1.ico" />
     <None Include="res\foo_bulktagger.ico" />
-    <None Include="res\icon1.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="res\foo_bulktagger.rc">
