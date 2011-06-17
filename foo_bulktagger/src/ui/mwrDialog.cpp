@@ -1,6 +1,7 @@
 #include "mwrDialog.h"
 #include "atlmisc.h"
 #include "../release matching/selectionTreeModel.h"
+#include "../release matching/selectionDivision.h"
 
 using namespace WTL;
 
@@ -22,43 +23,46 @@ namespace FBT
 	{
 		CenterWindow();
 		SetupTreeView();
+
+		HWND listBoxHandle = GetDlgItem(IDC_SELECTIONTRACKS);
+		selectionTracksListBox.Attach(listBoxHandle);
+
 		console::printf("Dialog initiated");
 
 		return TRUE;
 	}
-
+		
+	// Populates tree view according to selection model
 	// TODO make root non-collapsible and take away its button accordingly
 	void MatchWithReleasesDialog::SetupTreeView()
 	{
 		HWND treeViewHandle = GetDlgItem(IDC_SELECTIONTREE);
 		selectionTreeView.Attach(treeViewHandle);
 
-		// Populate tree view according to selection model
-		CTreeItem rootNode = selectionTreeView.InsertItem(_T("Selection"), TVI_ROOT, TVI_ROOT);
-		
+		// Create root node
+		STRING8_TO_LPCTSTR(model->GetRoot()->GetStringData(), 32, convertedRootString);
+		CTreeItem rootNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedRootString, 
+															0, 0, 0, 0, (LPARAM) model->GetRoot(),TVI_ROOT, TVI_ROOT);
+		HTREEITEM rootHandle = rootNode.operator HTREEITEM();
+
 		for (unsigned i = 0; i < model->ArtistCount(); i++)
 		{
 			SelectionTreeNode* artist = model->ArtistAt(i);
-						
-			// Extract artist string and convert it to a wchar_t[] (compatible with LPCTSTR since we're using UNICODE)
-			const std::string& artistString = artist->GetStringData();
-			wchar_t convertedArtistString[256];
-			int NbChars = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, artistString.c_str(), static_cast<int>(artistString.size()), convertedArtistString, sizeof(convertedArtistString) / sizeof(*convertedArtistString));
-			convertedArtistString[NbChars] = L'\0';
 
-			// Create artist node
-			CTreeItem artistNode = rootNode.AddTail(convertedArtistString,0);
-						
+			// Create artist node and append it to the root
+			STRING8_TO_LPCTSTR(artist->GetStringData(), 256, convertedArtistString);
+
+			CTreeItem artistNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedArtistString, 
+															0, 0, 0, 0, (LPARAM) artist, rootHandle, TVI_LAST);
+									
 			for(int j = 0; j < artist->ChildCount(); j++)
 			{
 				SelectionTreeNode* album = artist->ChildAt(j);
 
-				const std::string& albumString = album->GetStringData();
-				wchar_t convertedAlbumString[256];
-				int NbChars = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, albumString.c_str(), static_cast<int>(albumString.size()), convertedAlbumString, sizeof(convertedAlbumString) / sizeof(*convertedAlbumString));
-				convertedAlbumString[NbChars] = L'\0';
-			
-				CTreeItem albumNode = artistNode.AddTail(convertedAlbumString, 0);
+				// Create album node and append it to the artist node
+				STRING8_TO_LPCTSTR(album->GetStringData(), 256, convertedAlbumString);
+				CTreeItem rootNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedAlbumString, 
+										0, 0, 0, 0, (LPARAM) album, artistNode.operator HTREEITEM(), TVI_LAST);
 			}
 		}
 	}
@@ -70,56 +74,43 @@ namespace FBT
 	}
 
 
-	bool cvtLPW2stdstring(std::string& s, const LPWSTR pw,
-                      UINT codepage = CP_ACP)
-{
-    bool res = false;
-    char* p = 0;
-    int bsz;
-
-    bsz = WideCharToMultiByte(codepage,
-        0,
-        pw,-1,
-        0,0,
-        0,0);
-
-	console::printf("length = %d", bsz);
-
-
-    if (bsz > 0) {
-        p = new char[bsz];
-        int rc = WideCharToMultiByte(codepage,
-            0,
-            pw,-1,
-            p,bsz,
-            0,0);
-        if (rc != 0) {
-            p[bsz-1] = 0;
-            s = p;
-            res = true;
-        }
-    }
-    delete [] p;
-    return res;
-}
-
-
 
 	LRESULT MatchWithReleasesDialog::OnTreeSelectionChanged(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
 	{
 		LPNMTREEVIEW newSelection = (LPNMTREEVIEW) pNMHDR;
 		LPTVITEM lptvid = &newSelection->itemNew;
-		LPWSTR orig = lptvid->pszText;
-
-		std::string str;
-
-		if (cvtLPW2stdstring(str,orig))
-		{
-			console::printf("selection = %s", str.c_str());
-		}
-	
 		
+		SelectionTreeNode* node = (SelectionTreeNode*) lptvid->lParam;
+		
+		if (node->HasSelectionData())
+		{
+			selectionTracksListBox.ResetContent();
+						
+			SelectionToMatch* selection = node->GetSelectionData();
+			const metadb_handle_list& tracks = selection->GetTracks();
+			file_info_impl trackInfo;
 
+			for (unsigned  i = 0; i < tracks.get_count(); i++)
+			{
+				tracks[i]->get_info(trackInfo);
+								
+				pfc::string8 displayString;
+
+				const char* track = trackInfo.meta_get("tracknumber", 0);
+				if (track)
+				{
+					displayString.add_string(track);
+					displayString.add_string(" - ", 3);
+				}
+				
+				const char* title = trackInfo.meta_get("title", 0);
+				displayString.add_string(title);
+				
+				STRING8_TO_LPCTSTR(displayString, 256, convertedDisplayString);
+				selectionTracksListBox.AddString(convertedDisplayString);
+			}
+		}
+		
 		return 0L;
 	}
 		

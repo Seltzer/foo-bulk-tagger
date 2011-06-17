@@ -94,10 +94,10 @@ void SelectionDivisorByTags::DivideSelection()
 			{
 				console::printf("couldn't get track info");
 				continue;
-
 			}
 				
-			treeModel->FetchOrCreate(artist, album);
+			SelectionToMatch* match = treeModel->FetchOrCreate(artist, album);
+			match->AddTrack(trackPtr);
 		}
 	}
 

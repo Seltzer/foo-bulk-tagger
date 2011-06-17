@@ -55,60 +55,6 @@ IDR_MAINFRAME           ICON                    "foo_bulktagger.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Dialog
-//
-
-IDD_ABOUTBOX DIALOGEX 0, 0, 187, 102
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "About"
-FONT 8, "MS Shell Dlg", 0, 0, 0x0
-BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,130,81,50,14
-    CTEXT           "foo_bulktagger Application v1.0\n\n(c) Copyright 2010",IDC_STATIC,25,57,78,32
-    ICON            IDR_MAINFRAME,IDC_STATIC,55,26,21,20
-    GROUPBOX        "",IDC_STATIC,7,6,115,89
-END
-
-IDD_MAINDLG DIALOG 0, 0, 187, 98
-STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
-CAPTION "foo_bulktagger"
-FONT 8, "MS Shell Dlg"
-BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,130,7,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,130,24,50,14
-    PUSHBUTTON      "&About",ID_APP_ABOUT,130,77,50,14
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO
-BEGIN
-    IDD_ABOUTBOX, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 180
-        TOPMARGIN, 6
-        BOTTOMMARGIN, 95
-    END
-
-    IDD_MAINDLG, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 180
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 91
-    END
-END
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Accelerator
 //
 
@@ -177,6 +123,7 @@ END
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "foo_bulktagger"
+    RELEASES_TO_MATCH       "Releases to Match"
 END
 
 STRINGTABLE
@@ -273,15 +220,25 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_NZ
 // Dialog
 //
 
-IDD_MWRDIALOG DIALOGEX 0, 0, 684, 424
+IDD_MWRDIALOG DIALOGEX 0, 0, 748, 425
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dialog"
+CAPTION "Match Music with Releases"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,205,403,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,627,403,50,14
-    CONTROL         "",IDC_SELECTIONTREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | WS_BORDER | WS_HSCROLL | WS_TABSTOP,18,18,157,291
-    LISTBOX         IDC_LIST1,183,17,291,289,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "Do stuff",IDOK,17,351,50,14
+    PUSHBUTTON      "Do other stuff",IDCANCEL,73,351,60,14
+    CONTROL         "",IDC_SELECTIONTREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | WS_BORDER | WS_HSCROLL | WS_TABSTOP,22,42,157,291
+    LISTBOX         IDC_SELECTIONTRACKS,189,41,199,181,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Releases to Match:",IDC_STATIC,23,30,103,10
+    LTEXT           "Tracks in Selected Release:",IDC_STATIC,187,27,94,8
+    GROUPBOX        "Your Music",IDC_STATIC,15,17,385,319
+    GROUPBOX        "MusicBrainZ Matches",IDC_STATIC,407,17,327,317
+    LISTBOX         IDC_MBTRACKS,416,39,164,182,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Tracks in Matched Release:",IDC_STATIC,416,28,110,8
+    LISTBOX         IDC_CANDIDATEMATCHES,585,39,144,183,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Candidate Matches:",IDC_STATIC,586,28,65,8
+    LTEXT           "infoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfo",IDC_STATIC,415,230,193,97
+    LTEXT           "infoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfoinfo",IDC_STATIC,189,230,193,97
 END
 
 
@@ -296,9 +253,9 @@ BEGIN
     IDD_MWRDIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 677
+        RIGHTMARGIN, 741
         TOPMARGIN, 7
-        BOTTOMMARGIN, 417
+        BOTTOMMARGIN, 418
     END
 END
 #endif    // APSTUDIO_INVOKED

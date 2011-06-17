@@ -20,15 +20,15 @@ namespace FBT
 
 	public:
 		// Owns a SelectionToMatch
-		SelectionTreeNode(const std::string& data, SelectionTreeNode* parent = NULL);
+		SelectionTreeNode(const pfc::string8& data, SelectionTreeNode* parent = NULL);
 		// Doesn't own a SelectionToMatch
-		SelectionTreeNode(SelectionToMatch*, const std::string& data, SelectionTreeNode* parent = NULL);
+		SelectionTreeNode(SelectionToMatch*, const pfc::string8& data, SelectionTreeNode* parent = NULL);
 
 		void AppendChild(SelectionTreeNode*);
 		// TODO improve efficiency by caching
 
-		bool HasChild(const std::string& childData) const;
-		SelectionTreeNode* GetChild(const std::string& childData);
+		bool HasChild(const pfc::string8& childData) const;
+		SelectionTreeNode* GetChild(const pfc::string8& childData);
 		SelectionTreeNode* ChildAt(int row);
 		int ChildCount() const;
 
@@ -37,7 +37,8 @@ namespace FBT
 		SelectionTreeNode* GetParent();
 		void SetParent(SelectionTreeNode*);
 
-		const std::string& GetStringData() const;
+		const pfc::string8& GetStringData() const;
+		bool HasSelectionData() const;
 		SelectionToMatch* GetSelectionData() const;
 
 
@@ -45,7 +46,7 @@ namespace FBT
 		SelectionTreeNode* parentNode;
 		std::vector<SelectionTreeNode*> childNodes;
 		
-		std::string stringData;
+		pfc::string8 stringData;
 		SelectionToMatch* selectionData;
 	};
 	
@@ -61,21 +62,21 @@ namespace FBT
 		~SelectionTreeModel();
 
 		void AppendArtist(SelectionTreeNode*);
-		bool HasArtist(const std::string& artistName) const;
+		bool HasArtist(const pfc::string8& artistName) const;
 		SelectionTreeNode* ArtistAt(unsigned);
 		unsigned ArtistCount() const;
 
-
-
 		// TODO provide overload for folder name
 		// TODO doesn't handle blank artist/album tags yet
-		SelectionToMatch* FetchOrCreate(const std::string& artist, const std::string& album);
+		SelectionToMatch* FetchOrCreate(const pfc::string8& artist, const pfc::string8& album);
 
+		SelectionTreeNode* GetRoot();
+		
 		void SortTreeAlphabetically();
 
 
 	private:
-		SelectionTreeNode* GetArtist(const std::string& artistName);
+		SelectionTreeNode* GetArtist(const pfc::string8& artistName);
 		
 		SelectionTreeNode* rootNode;
 

@@ -45,8 +45,8 @@ namespace FBT
 		// View stuff
 		HWND parentWindow;
 		WTL::CTreeViewCtrlEx selectionTreeView;
-
-		
+		WTL::CListBox selectionTracksListBox;
+					
 
 	};
 

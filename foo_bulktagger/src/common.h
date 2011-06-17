@@ -17,3 +17,9 @@
 
 #define WHERES_WALLY console::printf("Inside %s at %d", __FUNCTION__, __LINE__);
 
+
+
+// Wrapper for convert_utf8_to_wide
+#define STRING8_TO_LPCTSTR(input, maxLength, output)													\
+	wchar_t output[maxLength + 1];																		\
+	pfc::stringcvt::convert_utf8_to_wide(output,256, input.get_ptr(), input.length());

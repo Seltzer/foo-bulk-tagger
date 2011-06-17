@@ -23,12 +23,12 @@ bool selectionTreeNodeComparator(const SelectionTreeNode* node1, const Selection
 
 
 /////////////////////////////// SelectionTreeNode implementation
-SelectionTreeNode::SelectionTreeNode(const std::string& data, SelectionTreeNode* parent)
+SelectionTreeNode::SelectionTreeNode(const pfc::string8& data, SelectionTreeNode* parent)
 	: parentNode(parent), stringData(data)
 {
 }
 
-SelectionTreeNode::SelectionTreeNode(SelectionToMatch* selection, const std::string& data, SelectionTreeNode* parent)
+SelectionTreeNode::SelectionTreeNode(SelectionToMatch* selection, const pfc::string8& data, SelectionTreeNode* parent)
 	: selectionData(selection), parentNode(parent), stringData(data)
 {
 }
@@ -43,13 +43,13 @@ void SelectionTreeNode::AppendChild(SelectionTreeNode* child)
 }
 
 
-const std::string& SelectionTreeNode::GetStringData() const
+const pfc::string8& SelectionTreeNode::GetStringData() const
 {
 	return stringData;
 }
 
 
-bool SelectionTreeNode::HasChild(const std::string& childData) const
+bool SelectionTreeNode::HasChild(const pfc::string8& childData) const
 {
 	for(vector<SelectionTreeNode*>::const_iterator it = childNodes.begin(); it < childNodes.end(); it++)
 	{
@@ -60,7 +60,7 @@ bool SelectionTreeNode::HasChild(const std::string& childData) const
 	return false;
 }
 
-SelectionTreeNode* SelectionTreeNode::GetChild(const std::string& childData)
+SelectionTreeNode* SelectionTreeNode::GetChild(const pfc::string8& childData)
 {
 	for(vector<SelectionTreeNode*>::const_iterator it = childNodes.begin(); it < childNodes.end(); it++)
 	{
@@ -80,6 +80,11 @@ void SelectionTreeNode::SortChildrenAlphabetically(bool recurse)
 		for(vector<SelectionTreeNode*>::const_iterator it = childNodes.begin(); it < childNodes.end(); it++)
 			(*it)->SortChildrenAlphabetically(true);
 	}
+}
+
+bool SelectionTreeNode::HasSelectionData() const
+{
+	return selectionData != NULL;
 }
 
 SelectionToMatch* SelectionTreeNode::GetSelectionData() const
@@ -131,12 +136,12 @@ void SelectionTreeModel::AppendArtist(SelectionTreeNode* artist)
 	rootNode->AppendChild(artist);
 }
 
-bool SelectionTreeModel::HasArtist(const std::string& artistName) const
+bool SelectionTreeModel::HasArtist(const pfc::string8& artistName) const
 {
 	return rootNode->HasChild(artistName);
 }
 
-SelectionTreeNode* SelectionTreeModel::GetArtist(const std::string& artistName)
+SelectionTreeNode* SelectionTreeModel::GetArtist(const pfc::string8& artistName)
 {
 	return rootNode->GetChild(artistName);
 }
@@ -152,7 +157,7 @@ unsigned SelectionTreeModel::ArtistCount() const
 }
 
 
-SelectionToMatch* SelectionTreeModel::FetchOrCreate(const std::string& artistName, const std::string& albumName)
+SelectionToMatch* SelectionTreeModel::FetchOrCreate(const pfc::string8& artistName, const pfc::string8& albumName)
 {
 	SelectionTreeNode* artist = GetArtist(artistName);
 	SelectionTreeNode* album = NULL;
@@ -189,7 +194,10 @@ void SelectionTreeModel::SortTreeAlphabetically()
 }
 
 
-
+SelectionTreeNode* SelectionTreeModel::GetRoot()
+{
+	return rootNode;
+}
 
 
 
