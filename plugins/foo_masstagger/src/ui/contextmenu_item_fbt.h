@@ -155,14 +155,14 @@ public:
 
 					for (int i = 0; i < 100; i++)
 					{
-					//	j += 2;
+						j += 2;
 					}
 				
 					
 					console::printf("j = %d", j);
 					console::printf("got here");
 
-					/*
+					
 					try
 					{
 						throw std::exception("exception");
@@ -171,7 +171,7 @@ public:
 					{
 						console::printf("caught exception yay");
 						// why does this work???
-					}*/
+					}
 
 					try 
 					{
