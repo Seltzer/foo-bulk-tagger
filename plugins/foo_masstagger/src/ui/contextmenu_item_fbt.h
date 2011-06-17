@@ -8,15 +8,15 @@
 #include <musicbrainz3/query.h>
 #include <musicbrainz3/model.h>
 
+
 #include "common.h"
-
 #include "../plugin.h"
-//#include "ui/matchWithReleasesDialog.h"
 
+
+#include <iostream>
 
 using namespace MusicBrainz;
-
-
+using namespace std;
 
 
 
@@ -41,6 +41,9 @@ static service_factory_single_t<contextmenu_group_popup_impl>
 
 
 
+
+
+
 class contextmenu_fbt 
 	: public contextmenu_item_simple
 {
@@ -53,10 +56,10 @@ private:
 		Config
 	};
 
+
 public:	
 
 	GUID get_parent() { return contextmenu_fbt_id; }
-
 	unsigned get_num_items() { return 2; }
 	
 	void get_item_name(unsigned p_index, pfc::string_base& p_out)
@@ -126,37 +129,88 @@ public:
 					const char* field = info.meta_get("Artist",0);
 
 					if(field != NULL)
+					{
 						console::printf("Field = %s", field);
+
+						console::printf("%d", pfc::strlen_utf8(field));
+						
+					}
+
+					const char* field2 = "hai";
+					console::printf("hailength = %d", pfc::strlen_utf8(field2));
+					std::string fieldAsString(field);
+					console::printf(fieldAsString.c_str());
+					console::printf(fieldAsString.c_str());
+
 					
 					Query q;
 					ArtistResultList results;
 
-					Plugin::GetInstance()->SpawnMatchWithReleasesDialog();
-//					MatchWithReleasesDialog::ShowWindow();
+					//Plugin::GetInstance()->SpawnMatchWithReleasesDialog();
 					
+					
+					
+					int j = 0;
+
+
+					for (int i = 0; i < 100; i++)
+					{
+					//	j += 2;
+					}
+				
+					
+					console::printf("j = %d", j);
+					console::printf("got here");
+
 					/*
+					try
+					{
+						throw std::exception("exception");
+					}
+					catch (std::exception &e)
+					{
+						console::printf("caught exception yay");
+						// why does this work???
+					}*/
+
 					try 
 					{
 						// Search for all artists matching the given name. Limit the results
 						// to the 5 best matches.
-		
-						ArtistFilter f = ArtistFilter().name(field).limit(5);
-						results = q.getArtists(&f);
+						
+						console::printf("before");
+						char a[] = "hai";
+
+						ArtistFilter f;
+						f.name(a);
+
+						console::printf("after");
+						//ArtistFilter f = ArtistFilter().name(s);
+						//ArtistFilter f = ArtistFilter().name(field).limit(5);
+						//results = q.getArtists(&f);
 					}
 					catch (WebServiceError &e) 
 					{
+						console::printf("caught exception");
 					}
+					/*
+					catch (std::exception& e)
+					{
+						console::error("exception2");
+					}*/
+
+					console::printf("here3 i am!");
 
 					// No error occurred, so display the results of the search. It consists of
 					// ArtistResult objects, where each contains an artist.
 	
+					/*
 					for (ArtistResultList::iterator i = results.begin(); i != results.end(); i++) 
 					{
 						ArtistResult *result = *i;
 						Artist *artist = result->getArtist();
 						console::printf("iteration");
 						
-						/*
 						cout << "Score   : " << result->getScore() << endl;
 						cout << "Id      : " << artist->getId() << endl;
 						cout << "Name    : " << artist->getName() << endl;

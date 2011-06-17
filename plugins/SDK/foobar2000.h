@@ -4,8 +4,7 @@
 #define _FOOBAR2000_H_
 
 #ifndef UNICODE
-#define UNICODE
-//#error Only UNICODE environment supported.
+	#error Only UNICODE environment supported.
 #endif
 
 // #define FOOBAR2000_TARGET_VERSION 75 // 0.9.6
