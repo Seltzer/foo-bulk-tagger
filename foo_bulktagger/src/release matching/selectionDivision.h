@@ -1,7 +1,6 @@
 #ifndef SELECTION_DIVISOR_H_
 #define SELECTION_DIVISOR_H_
 
-#include <vector>
 #include "../common.h"
 #include "potentialMatch.h"
 
@@ -10,35 +9,9 @@
 
 namespace FBT
 {
-	class MatchingHeuristic;
 	class SelectionTreeModel;
 
-
-
-	// A selection of tracks to be matched with one release in the MusicBrainz database
-	class SelectionToMatch
-	{
-
-	public:
-		SelectionToMatch();
-		SelectionToMatch(const metadb_handle_list&);
-
-		void AddTrack(metadb_handle_ptr);
-		void AddTracks(const metadb_handle_list&);
-		const metadb_handle_list& GetTracks();
-
-		void FindMatches(MatchingHeuristic&);
-
-	private:
-		metadb_handle_list tracks;
-		
-		bool matchAttempted;
-		std::vector<PotentialMatch> potentialMatches;
-	};
-
-
-
-
+	
 	// Interface for a class which divides a selection of tracks into SelectionToMatch divisions 
 	// according to some criteria
 	class ISelectionDivisor
@@ -56,9 +29,7 @@ namespace FBT
 	protected:
 		metadb_handle_list selection;
 	};
-
-
-
+	
 
 	/* ISelectionDivisor implementation which divides tracks according to:
 			1.) Artist - Album Name (based on tags when Artist + Album Name are both present)

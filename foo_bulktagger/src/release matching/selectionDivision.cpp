@@ -1,51 +1,16 @@
 #include "selectionDivision.h"
-#include "matchingHeuristics.h"
 #include "selectionTreeModel.h"
+#include "selection.h"
 
 using namespace std;
 
 
 
 
+
+
 namespace FBT
 {
-
-
-
-
-///////////////// SelectionToMatch implementation
-SelectionToMatch::SelectionToMatch()
-{
-}
-	
-SelectionToMatch::SelectionToMatch(const metadb_handle_list& tracks)
-	: tracks(tracks), matchAttempted(false)
-{
-}
-
-void SelectionToMatch::AddTrack(metadb_handle_ptr track)
-{
-	tracks.add_item(track);
-}
-
-void SelectionToMatch::AddTracks(const metadb_handle_list& tracksToAdd)
-{
-	tracks += tracksToAdd;
-	tracks.remove_duplicates();
-}
-
-const metadb_handle_list& SelectionToMatch::GetTracks()
-{
-	return tracks;
-}
-
-void SelectionToMatch::FindMatches(MatchingHeuristic& heuristic)
-{
-	potentialMatches = heuristic.FindMatches(*this);
-	
-	matchAttempted = true;
-}
-
 
 
 

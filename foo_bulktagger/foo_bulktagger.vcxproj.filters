@@ -40,6 +40,9 @@
     <ClCompile Include="src\release matching\selectionTreeModel.cpp">
       <Filter>src\release matching</Filter>
     </ClCompile>
+    <ClCompile Include="src\release matching\selection.cpp">
+      <Filter>src\release matching</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\release matching\matchingHeuristics.h">
@@ -72,6 +75,9 @@
     <ClInclude Include="src\release matching\selectionTreeModel.h">
       <Filter>src\release matching</Filter>
     </ClInclude>
+    <ClInclude Include="src\release matching\selection.h">
+      <Filter>src\release matching</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\foo_bulktagger.ico">
@@ -87,6 +93,9 @@
       <Filter>docs</Filter>
     </None>
     <None Include="..\docs\migration.txt">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="..\docs\TODO.txt">
       <Filter>docs</Filter>
     </None>
   </ItemGroup>

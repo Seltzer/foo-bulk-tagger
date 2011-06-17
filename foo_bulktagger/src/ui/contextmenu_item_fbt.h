@@ -8,6 +8,7 @@
 
 
 
+
 // {054DAED3-A724-4a76-8102-8D068DBC0158}
 static const GUID guid_FetchTags = 
 		{ 0x54daed3, 0xa724, 0x4a76, { 0x81, 0x2, 0x8d, 0x6, 0x8d, 0xbc, 0x1, 0x58 } };
@@ -124,6 +125,10 @@ public:
 				break;
 			}
 			case Config:
+			{
+				
+				break;
+			}
 			break;
 		}
 	}

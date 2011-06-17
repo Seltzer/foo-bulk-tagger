@@ -1,16 +1,16 @@
 #include "mwrDialog.h"
 #include "atlmisc.h"
 #include "../release matching/selectionTreeModel.h"
-#include "../release matching/selectionDivision.h"
+#include "../release matching/selection.h"
 
 using namespace WTL;
 
 
 
 
-
 namespace FBT
 {
+	
 
 	
 	MatchWithReleasesDialog::MatchWithReleasesDialog(SelectionTreeModel* model, HWND parent)
@@ -23,12 +23,12 @@ namespace FBT
 	{
 		CenterWindow();
 		SetupTreeView();
+		SetupPropertyGrids();
 
 		HWND listBoxHandle = GetDlgItem(IDC_SELECTIONTRACKS);
 		selectionTracksListBox.Attach(listBoxHandle);
 
 		console::printf("Dialog initiated");
-
 		return TRUE;
 	}
 		
@@ -63,9 +63,19 @@ namespace FBT
 				STRING8_TO_LPCTSTR(album->GetStringData(), 256, convertedAlbumString);
 				CTreeItem rootNode = selectionTreeView.InsertItem(TVIF_TEXT | TVIF_PARAM, convertedAlbumString, 
 										0, 0, 0, 0, (LPARAM) album, artistNode.operator HTREEITEM(), TVI_LAST);
+
+				// While we're here, build the metadata table for the selection - we're gonna need it later
+				album->GetSelectionData()->BuildMetaTable();
 			}
 		}
 	}
+
+	void MatchWithReleasesDialog::SetupPropertyGrids()
+	{
+		selectionDataGrid.SubclassWindow(GetDlgItem(IDC_SELECTIONDATA));
+		selectionDataGrid.SetExtendedGridStyle(PGS_EX_SINGLECLICKEDIT | PGS_EX_ADDITEMATEND);
+	}
+
 
 	LRESULT MatchWithReleasesDialog::OnOKCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 	{
@@ -88,9 +98,9 @@ namespace FBT
 						
 			SelectionToMatch* selection = node->GetSelectionData();
 			const metadb_handle_list& tracks = selection->GetTracks();
-			file_info_impl trackInfo;
 
-			for (unsigned  i = 0; i < tracks.get_count(); i++)
+			file_info_impl trackInfo;
+			for (t_size i = 0; i < tracks.get_count(); i++)
 			{
 				tracks[i]->get_info(trackInfo);
 								
@@ -109,11 +119,57 @@ namespace FBT
 				STRING8_TO_LPCTSTR(displayString, 256, convertedDisplayString);
 				selectionTracksListBox.AddString(convertedDisplayString);
 			}
+
+			selection->GetMetaTableBuilder().UpdatePropertyGrid(selectionDataGrid);
 		}
 		
 		return 0L;
 	}
 		
+	LRESULT MatchWithReleasesDialog::OnAddItem(int idCtrl, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/)
+	{
+		ATLTRACE(_T("OnAddItem - Ctrl: %d\n"), idCtrl); idCtrl;
+
+		int i = selectionDataGrid.InsertItem(-1, PropCreateReadOnlyItem(_T(""), _T("Dolly")));
+		selectionDataGrid.SetSubItem(i, 1, PropCreateSimple(_T(""), true));
+		selectionDataGrid.SetSubItem(i, 2, PropCreateCheckButton(_T(""), false));
+		selectionDataGrid.SetSubItem(i, 3, PropCreateSimple(_T(""), _T("")));
+		selectionDataGrid.SelectItem(i);
+		return 0;
+	}
+
+	LRESULT MatchWithReleasesDialog::OnSelChanged(int idCtrl, LPNMHDR pnmh, BOOL& /*bHandled*/)
+	{
+		LPNMPROPERTYITEM pnpi = (LPNMPROPERTYITEM) pnmh;
+		if( pnpi->prop==NULL ) 
+			return 0;
+		
+		TCHAR szValue[100] = { 0 };      
+		pnpi->prop->GetDisplayValue(szValue, sizeof(szValue)/sizeof(TCHAR));
+		CComVariant vValue;
+		pnpi->prop->GetValue(&vValue);
+		vValue.ChangeType(VT_BSTR);
+		
+		ATLTRACE(_T("OnSelChanged - Ctrl: %d, Name: '%s', DispValue: '%s', Value: '%ls'\n"),
+					idCtrl, pnpi->prop->GetName(), szValue, vValue.bstrVal); idCtrl;
+		return 0;
+	}
+
+	LRESULT MatchWithReleasesDialog::OnItemChanged(int idCtrl, LPNMHDR pnmh, BOOL& /*bHandled*/)
+	{
+		LPNMPROPERTYITEM pnpi = (LPNMPROPERTYITEM) pnmh;
+		TCHAR szValue[100] = { 0 };
+		pnpi->prop->GetDisplayValue(szValue, sizeof(szValue)/sizeof(TCHAR));
+		CComVariant vValue;
+		pnpi->prop->GetValue(&vValue);
+		vValue.ChangeType(VT_BSTR);
+		
+		ATLTRACE(_T("OnItemChanged - Ctrl: %d, Name: '%s', DispValue: '%s', Value: '%ls'\n"),
+						idCtrl, pnpi->prop->GetName(), szValue, vValue.bstrVal); idCtrl;
+		return 0;
+	}
+
+
 	LRESULT MatchWithReleasesDialog::TestMsgLoop(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 	{
 		console::print("Message loop is working");

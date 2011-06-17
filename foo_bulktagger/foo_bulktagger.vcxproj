@@ -88,13 +88,13 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\depends\WTL\Include;$(SolutionDir)\depends\SDK;$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\depends;$(SolutionDir)\depends\helpers</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\depends\WTL\Include;$(SolutionDir)\depends\SDK;$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\depends;$(SolutionDir)\depends\helpers;$(SolutionDir)\depends\ATLHelpers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalLibraryDirectories>$(SolutionDir)\Release;$(SolutionDir)\depends\shared;$(SolutionDir)\depends\o_libmusicbrainz\src\Release;$(SolutionDir)\depends\neon-0.29.3;$(SolutionDir)\depends\o_libdiscid\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shlwapi.lib;shared.lib;foobar2000_SDK.lib;foobar2000_sdk_helpers.lib;foobar2000_ATL_helpers.lib;foobar2000_component_client.lib;pfc.lib;musicbrainz3.lib;libneon.lib;discid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;shared.lib;foobar2000_SDK.lib;foobar2000_sdk_helpers.lib;foobar2000_ATL_helpers.lib;foobar2000_component_client.lib;pfc.lib;musicbrainz3.lib;libneon.lib;discid.lib;wtl_widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -122,6 +122,7 @@
     <ClCompile Include="src\foo_bulktagger.cpp" />
     <ClCompile Include="src\plugin.cpp" />
     <ClCompile Include="src\release matching\matchingHeuristics.cpp" />
+    <ClCompile Include="src\release matching\selection.cpp" />
     <ClCompile Include="src\release matching\selectionDivision.cpp" />
     <ClCompile Include="src\release matching\selectionTreeModel.cpp" />
     <ClCompile Include="src\ui\mwrDialog.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="src\plugin.h" />
     <ClInclude Include="src\release matching\matchingHeuristics.h" />
     <ClInclude Include="src\release matching\potentialMatch.h" />
+    <ClInclude Include="src\release matching\selection.h" />
     <ClInclude Include="src\release matching\selectionDivision.h" />
     <ClInclude Include="src\release matching\selectionTreeModel.h" />
     <ClInclude Include="src\ui\contextmenu_item_fbt.h" />
@@ -143,6 +145,7 @@
     <None Include="..\docs\learning.txt" />
     <None Include="..\docs\migration.txt" />
     <None Include="..\docs\plan.txt" />
+    <None Include="..\docs\TODO.txt" />
     <None Include="res\foo_bulktagger.ico" />
   </ItemGroup>
   <ItemGroup>

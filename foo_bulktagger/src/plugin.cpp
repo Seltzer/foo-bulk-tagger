@@ -63,7 +63,6 @@ void Plugin::SpawnMatchWithReleasesDialog(SelectionTreeModel* model)
 {
 	MatchWithReleasesDialog* dialog = new MatchWithReleasesDialog(model, core_api::get_main_window());
 
-	//if (!dialog->Create(core_api::get_main_window()))
 	if (!dialog->Create(NULL))
 		console::printf("Dialog creation failed");
 

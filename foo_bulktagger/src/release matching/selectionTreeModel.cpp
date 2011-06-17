@@ -1,7 +1,7 @@
 #include <algorithm>
 
 #include "selectionTreeModel.h"
-#include "selectionDivision.h"
+#include "selection.h"
 
 using namespace std;
 

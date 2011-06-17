@@ -6,18 +6,17 @@ MatchWithReleases Stuff:
 
 * Add popups for tracks which show their metadata
 * Maybe it'd be a better idea to divide track selections according to the user's current Foobar
-  division
+  division. If not, still have to add folder location
 * Releases to Match treeview:
 	- Decide whether to allow non-leaf nodes to be clickable. If they're clickable they should
 	  probably trigger changes in the track listbox too.
 	- Decide whether we want to show the root node
 * Matching heuristics:
 	- Look into track fingerprinting
-* Add some sort of control for displaying possibly editable metadata for a selected release:
-  Ideally, we should emulate (read steal) Foobar's property window which has all of this stuff 
-  implemented exactly as I want it. That's possibly what the inplace_edit headers in
-  ATL helpers are for but I haven't really looked into to it - would be a lot easier if it was
-  actually documented ffs. MFC's property grid control is roughly what I want.
+* Property Grid for metadata
+	- Erase when a new selection is made
+	- Allow writing to tags
+
 
 
 Altering Releases Stuff:
