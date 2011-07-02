@@ -111,11 +111,11 @@ namespace FBT
 		pfc::dynamic_assert(currentSelection != NULL);
 
 		currentSelection->DoPuidStuff();
+			
+		//currentSelection->FindMatches(heuristic, scoringHeuristic);
+		
 
 		//currentSelection->WriteTags(addedModifiedTags, this->operator HWND());
-
-
-
 
 		return 0;
 	}

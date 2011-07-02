@@ -7,4 +7,8 @@ Build neon by running nmake /f the .mak file
 Run CMake over libmusicbrainz and output to o_libmusicbrainz to produce sln
 Open sln - make musicbrainz3 link against Ws2_32.lib, build
 
-discid.dll and musicbrainz3.dll must be copied to the foobar dir
+When running CMake:
+	- Release Mode
+	- Default VC10 compilers (32 bit, not 64 bit)
+
+discid.dll, musicbrainz3.dll, libcurl-3.dll, libfftw3-3.dll and libofa.dll must be copied to the foobar dir

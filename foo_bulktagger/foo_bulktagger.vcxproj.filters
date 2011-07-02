@@ -90,6 +90,9 @@
     <ClInclude Include="src\release matching\protocol.h">
       <Filter>src\release matching</Filter>
     </ClInclude>
+    <ClInclude Include="src\stringConstants.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\foo_bulktagger.ico">

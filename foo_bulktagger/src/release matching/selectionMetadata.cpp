@@ -143,6 +143,7 @@ bool SelectionMetaTableBuilder::AddTagAsKey(const pfc::string8& tag)
 
 bool SelectionMetaTableBuilder::HasTagAsKey(const pfc::string8& tag) const
 {
+	console::printf("SelectionMetaTableBuilder::HasTagAsKey with tag key = %s", tag.get_ptr());
 	for (pfc::chain_list_v2_t<ExtendedTagInfo>::const_iterator it  = extendedTagModel.first(); it.is_valid(); it++)
 	{
 		if ((*it).realTagName == tag)
@@ -163,6 +164,19 @@ ExtendedTagInfo* SelectionMetaTableBuilder::GetExtendedTagData(const pfc::string
 	pfc::dynamic_assert(false);
 	return NULL;
 }
+
+const ExtendedTagInfo* SelectionMetaTableBuilder::GetExtendedTagData(const pfc::string8& tag) const
+{
+	for (pfc::chain_list_v2_t<ExtendedTagInfo>::const_iterator it  = extendedTagModel.first(); it.is_valid(); it++)
+	{
+		if ((*it).realTagName == tag)
+			return &(*it);
+	}
+
+	pfc::dynamic_assert(false);
+	return NULL;
+}
+
 
 void SelectionMetaTableBuilder::AddTagValues(const file_info& track, const pfc::string8& tag)
 {

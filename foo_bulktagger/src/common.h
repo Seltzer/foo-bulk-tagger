@@ -7,6 +7,9 @@
 #define COMPONENT_NAME "Foo Bulk Tagger"
 #define COMPONENT_NAME_MINIMAL "Bulk Tagger"
 
+#define INVALID -1
+
+#define DEV_MODE
 
 #define WM_TESTMSGLOOP WM_USER + 1
 

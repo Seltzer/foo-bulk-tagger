@@ -70,6 +70,12 @@ namespace FBT
 					   pfc::chain_list_v2_t<ExtendedTagInfo*>& addedTags,
 					   HWND dlgHandle);
 
+		// TODO
+		bool HasTagAsKey(const pfc::string8& tag) const;
+		ExtendedTagInfo* GetExtendedTagData(const pfc::string8& tag);
+		const ExtendedTagInfo* GetExtendedTagData(const pfc::string8& tag) const;
+
+
 		//! Obsolete
 		void DebugToConsole() const;
 		
@@ -79,12 +85,10 @@ namespace FBT
 		//		- Tag is valid
 		// Returns true if added successfully, false otherwise.
 		bool AddTagAsKey(const pfc::string8& tag);
-		bool HasTagAsKey(const pfc::string8& tag) const;
 		void AddTagValues(const file_info& track, const pfc::string8& tag);
 		pfc::string8 GetDecoratedTagValues(const pfc::string8& tag) const;
-		
-		ExtendedTagInfo* GetExtendedTagData(const pfc::string8& tag);
-		
+				
+		// An ExtendedTagInfo for each tag
 		pfc::chain_list_v2_t<ExtendedTagInfo> extendedTagModel;
 		bool processedATrack;
 	};

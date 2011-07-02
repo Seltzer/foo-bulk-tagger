@@ -1,6 +1,7 @@
 #include "selectionDivision.h"
 #include "selectionTreeModel.h"
 #include "selection.h"
+#include "../stringConstants.h"
 
 using namespace std;
 
@@ -51,8 +52,8 @@ void SelectionDivisorByTags::DivideSelection()
 
 		if (trackPtr->get_info(trackInfo))
 		{
-			const char* artist = trackInfo.meta_get("Artist",0);
-			const char* album = trackInfo.meta_get("Album",0);
+			const char* artist = trackInfo.meta_get(ARTIST_TAG,0);
+			const char* album = trackInfo.meta_get(ALBUM_TAG,0);
 							
 			SelectionToMatch* match = NULL;
 			

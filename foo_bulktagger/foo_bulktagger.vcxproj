@@ -88,12 +88,12 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\depends\WTL\Include;$(SolutionDir)\depends\SDK;$(SolutionDir)\depends\libmusicbrainz-3.0.2\include;$(SolutionDir)\depends;$(SolutionDir)\depends\helpers;$(SolutionDir)\depends\ATLHelpers;$(SolutionDir)\depends\libofa-0.9.3-win32\libofa\include;$(SolutionDir)\depends\expat</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\depends\WTL\Include;$(SolutionDir)\depends\SDK;$(SolutionDir)\depends\libmusicbrainz-3.0.3\include;$(SolutionDir)\depends;$(SolutionDir)\depends\helpers;$(SolutionDir)\depends\ATLHelpers;$(SolutionDir)\depends\libofa-0.9.3-win32\libofa\include;$(SolutionDir)\depends\expat</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Release;$(SolutionDir)\depends\shared;$(SolutionDir)\depends\o_libmusicbrainz\src\Release;$(SolutionDir)\depends\neon-0.29.3;$(SolutionDir)\depends\o_libdiscid\Release;$(SolutionDir)\depends\libofa-0.9.3-win32\libofa\win32\Release;$(SolutionDir)\depends\curl;$(SolutionDir\depends\expat;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Release;$(SolutionDir)\depends\shared;$(SolutionDir)\depends\o_libmusicbrainz\src\Release;$(SolutionDir)\depends\neon-0.29.3;$(SolutionDir)\depends\o_libdiscid\Release;$(SolutionDir)\depends\libofa-0.9.3-win32\libofa\win32\Release;$(SolutionDir)\depends\curl;$(SolutionDir)\depends\expat;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>shlwapi.lib;shared.lib;foobar2000_SDK.lib;foobar2000_sdk_helpers.lib;foobar2000_ATL_helpers.lib;foobar2000_component_client.lib;pfc.lib;musicbrainz3.lib;libneon.lib;discid.lib;wtl_widgets.lib;libcurl-3.lib;libexpat.lib;libofa.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
@@ -114,7 +114,7 @@
       </DllDataFileName>
     </Midl>
     <PostBuildEvent>
-      <Command>copy /Y "$(SolutionDir)\foo_bulktagger\Release\foo_bulktagger.dll" "C:\Program Files\foobar2000\components"</Command>
+      <Command>copy /Y "$(SolutionDir)\foo_bulktagger\Release\foo_bulktagger.dll" "C:\Program Files (x86)\foobar2000\components"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -133,6 +133,7 @@
     <ClInclude Include="res\resource.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\config.h" />
+    <ClInclude Include="src\stringConstants.h" />
     <ClInclude Include="src\plugin.h" />
     <ClInclude Include="src\release matching\matchingHeuristics.h" />
     <ClInclude Include="src\release matching\potentialMatch.h" />

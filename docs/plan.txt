@@ -33,7 +33,21 @@ Pass 2 - All metadata minus genre/style:
 
 	Main heuristic:
 		- Search for MB ids and use those
-		- My heuristic using artist/album data, number of tracks, track lengths, filenames etc.
+		- My heuristic using artist/album data, number of tracks, track lengths, filenames etc. Cases:
+			- Artist + Album tags both present without multivalue property
+				Search for releases by artist and album name
+				
+				- 1 result - take it
+				- >1 result - apply sub-heuristic to choose correct one
+				- 0 results
+			- Artist + Album tags both present with multivalue
+			- Artist present but not album - use #tracks heuristic on all releases of all artist results
+			- Album present but not artist - use #tracks heuristic on all release results
+			- No artist/album tags. Then:
+				- Search by track data OR
+				- Use filename/foldername
+							
+
 		- Fingerprinting
 
 	Give warnings about:

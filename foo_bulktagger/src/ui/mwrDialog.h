@@ -10,6 +10,7 @@
 
 #include "wtl_widgets\PropertyGrid.h"
 
+#include "../release matching/matchingHeuristics.h"
 
 namespace FBT
 {
@@ -61,6 +62,9 @@ namespace FBT
 		metadb_handle_list selectedTracks;
 		SelectionTreeModel* model;
 		SelectionToMatch* currentSelection;
+
+		MatchingHeuristicImpl heuristic;
+		ScoringHeuristicImpl scoringHeuristic;
 
 		// View stuff
 		HWND parentWindow;

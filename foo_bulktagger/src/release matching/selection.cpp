@@ -1,6 +1,6 @@
 #include "selection.h"
 #include "matchingHeuristics.h"
-
+#include "../stringConstants.h"
 
 #define WIN32
 #include "protocol.h"
@@ -52,9 +52,27 @@ void SelectionToMatch::AddTracks(const metadb_handle_list& tracksToAdd)
 	tracks.remove_duplicates();
 }
 
+void SelectionToMatch::FindMatches(MatchingHeuristic& heuristic, ScoringHeuristic& scoringHeuristic)
+{
+	potentialMatches = heuristic.FindMatches(*this, scoringHeuristic);
+	
+	matchAttempted = true;
+}
+
+void SelectionToMatch::WriteTags(pfc::chain_list_v2_t<ExtendedTagInfo*>& addedTags, HWND dlgHandle)
+{
+	metaTableBuilder.WriteTags(tracks, trackInfo, addedTags, dlgHandle);
+}
+
+
 const metadb_handle_list& SelectionToMatch::GetTracks()
 {
 	return tracks;
+}
+
+unsigned SelectionToMatch::GetTrackCount() const
+{
+	return tracks.get_count();
 }
 
 
@@ -66,22 +84,12 @@ void SelectionToMatch::BuildMetaTable()
 		metaTableBuilder.ExtractMetadata(tracks[t], *(trackInfo[t]) );
 }
 
+
 const SelectionMetaTableBuilder& SelectionToMatch::GetMetaTableBuilder() const
 {
 	return metaTableBuilder;
 }
 
-void SelectionToMatch::FindMatches(MatchingHeuristic& heuristic)
-{
-	potentialMatches = heuristic.FindMatches(*this);
-	
-	matchAttempted = true;
-}
-
-void SelectionToMatch::WriteTags(pfc::chain_list_v2_t<ExtendedTagInfo*>& addedTags, HWND dlgHandle)
-{
-	metaTableBuilder.WriteTags(tracks, trackInfo, addedTags, dlgHandle);
-}
 
 
 void GetPrint(AudioData* data)
@@ -199,9 +207,42 @@ void SelectionToMatch::DoPuidStuff()
 	ProcessSong(path + 7);
 }
 
+const pfc::chain_list_v2_t<pfc::string8>* SelectionToMatch::GetTagValues(const pfc::string8& tagKey) const
+{
+	console::printf("tag key = %s", tagKey.get_ptr());
+
+	if (!metaTableBuilder.HasTagAsKey(tagKey))
+	{
+		console::printf("sorrrrrrrrryy");
+		return NULL;
+	}
+	
+	const ExtendedTagInfo* info = metaTableBuilder.GetExtendedTagData(tagKey);
+
+	return &info->realTagValues;
+}
 
 
+pfc::chain_list_v2_t<pfc::string8> SelectionToMatch::GetArtistValues() const
+{
+	const pfc::chain_list_v2_t<pfc::string8>* values = GetTagValues(ARTIST_TAG);
 
+	if (!values)
+		return pfc::chain_list_v2_t<pfc::string8>();
+	else
+		return *values;
+}
+
+
+pfc::chain_list_v2_t<pfc::string8> SelectionToMatch::GetAlbumValues() const
+{
+	const pfc::chain_list_v2_t<pfc::string8>* values = GetTagValues(ALBUM_TAG);
+
+	if (!values)
+		return pfc::chain_list_v2_t<pfc::string8>();
+	else
+		return *values;
+}
 
 
 
